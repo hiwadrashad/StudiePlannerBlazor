@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace StudiePlannerBlazor.Client.DataService
@@ -18,27 +19,36 @@ namespace StudiePlannerBlazor.Client.DataService
 
         public async Task<TaskModel> Add(TaskModel model)
         {
-            throw new NotImplementedException();
+            var modelJson = new StringContent(JsonSerializer.Serialize(model), System.Text.Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.PostAsync("api/Task", modelJson);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return await JsonSerializer.DeserializeAsync<TaskModel>(await response.Content.ReadAsStreamAsync());
+            }
+            return null;
         }
 
         public async Task Delete(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public async Task<IEnumerable<TaskModel>> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<TaskModel> GetById(int id)
-        {
-            throw new NotImplementedException();
+            await _httpClient.DeleteAsync($"api/Task/{id}");
         }
 
         public async Task Update(TaskModel model)
         {
-            throw new NotImplementedException();
+            var modelJson = new StringContent(JsonSerializer.Serialize(model), System.Text.Encoding.UTF8, "application/json");
+            await _httpClient.PutAsync("api/Task", modelJson);
+        }
+
+        public async Task<IEnumerable<TaskModel>> GetAll()
+        {
+            return await JsonSerializer.DeserializeAsync<IEnumerable<TaskModel>>(await _httpClient.GetStreamAsync($"api/Task"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+        }
+
+        public async Task<TaskModel> GetById(int id)
+        {
+            return await JsonSerializer.DeserializeAsync<TaskModel>(await _httpClient.GetStreamAsync($"api/Task/{id}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true }); ;
         }
     }
 }
