@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StudiePlannerBlazor.Server.Repositories
 {
-    public class TaskRepository
+    public class TaskRepository : IRepository<TaskModel>
     {
         private readonly ApplicationDBContext _ApplicationDbContext;
 
@@ -16,25 +16,42 @@ namespace StudiePlannerBlazor.Server.Repositories
             _ApplicationDbContext = appcontext;
         }
 
-        public TaskModel AddTask(TaskModel model)
+        public TaskModel Add(TaskModel model)
         {
             var addedEntity = _ApplicationDbContext.Add(model);
             _ApplicationDbContext.SaveChanges();
             return model;
         }
 
-        public void DeleteTask(int id)
+        public TaskModel Delete(int id)
         {
-            var foundFotoModel = _ApplicationDbContext.taskModels.FirstOrDefault(p => p.Id == id);
-            if (foundFotoModel == null) return;
+            var foundModel = _ApplicationDbContext.taskModels.FirstOrDefault(p => p.Id == id);
+            if (foundModel == null) return null;
 
-            _ApplicationDbContext.taskModels.Remove(foundFotoModel);
+            _ApplicationDbContext.taskModels.Remove(foundModel);
             _ApplicationDbContext.SaveChanges();
+
+            return foundModel;
         }
 
-        public IEnumerable<TaskModel> GetAllFotoModellen()
+        public TaskModel Update(TaskModel model)
         {
-            return _ApplicationDbContext.taskModels;
+            var foundModel = _ApplicationDbContext.taskModels.FirstOrDefault(a => a.Id == model.Id);
+            foundModel = model;
+            _ApplicationDbContext.SaveChanges();
+            return foundModel;
         }
+
+        public List<TaskModel> GetAll()
+        {
+            return _ApplicationDbContext.taskModels.ToList();
+        }
+
+        public TaskModel GetById(int id)
+        {
+            return _ApplicationDbContext.taskModels.FirstOrDefault(a => a.Id == id);
+        }
+
+        
     }
 }
