@@ -12,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StudiePlannerBlazor.Server.Data;
 using StudiePlannerBlazor.Server.Models;
+using StudiePlannerBlazor.Server.Repositories;
+using StudiePlannerBlazor.Shared.Models;
 using System.Linq;
 
 namespace StudiePlannerBlazor.Server
@@ -44,6 +46,8 @@ namespace StudiePlannerBlazor.Server
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddScoped<IRepository<AppointmentModel>, AppointmentRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
