@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace StudiePlannerBlazor.Server.Repositories
 {
 
-    public class AppointmentRepository : IAppointmentRepository
+    public class AppointmentRepository : IRepository<Appointment>
     {
         private readonly ApplicationDBContext _ApplicationDbContext;
 
@@ -20,38 +20,40 @@ namespace StudiePlannerBlazor.Server.Repositories
             _ApplicationDbContext = appcontext;
         }
 
-        public Appointment AddAppointment(Appointment model)
+        public Appointment Add(Appointment model)
         {
             var addedEntity = _ApplicationDbContext.Add(model);
             _ApplicationDbContext.SaveChanges();
             return addedEntity.Entity;
         }
 
-        public void DeleteAppointment(int id)
+        public Appointment Delete(int id)
         {
-            var FoundModel = _ApplicationDbContext.Appointments.FirstOrDefault(a => a.Id == id);
-            if (FoundModel == null) return;
+            var foundModel = _ApplicationDbContext.Appointments.FirstOrDefault(a => a.Id == id);
+            if (foundModel == null) return null;
 
-            _ApplicationDbContext.Appointments.Remove(FoundModel);
+            _ApplicationDbContext.Appointments.Remove(foundModel);
             _ApplicationDbContext.SaveChanges();
+
+            return foundModel;
         }
 
-        public List<Appointment> GetAllAppointments()
+        public Appointment Update(Appointment model)
+        {
+            var foundModel = _ApplicationDbContext.Appointments.FirstOrDefault(a => a.Id == model.Id);
+            foundModel = model;
+            _ApplicationDbContext.SaveChanges();
+            return foundModel;
+        }
+
+        public List<Appointment> GetAll()
         {
             return _ApplicationDbContext.Appointments.ToList();
         }
 
-        public Appointment GetAppointmentById(int id)
+        public Appointment GetById(int id)
         {
             return _ApplicationDbContext.Appointments.FirstOrDefault(a => a.Id == id);
-        }
-
-        public Appointment UpdateAppointment(Appointment model)
-        {
-            var foundmodel = _ApplicationDbContext.Appointments.FirstOrDefault(a => a.Id == model.Id);
-            foundmodel = model;
-            _ApplicationDbContext.SaveChanges();
-            return foundmodel;
         }
     }
 }
