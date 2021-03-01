@@ -4,7 +4,7 @@ using System.Text;
 
 namespace StudiePlannerBlazor.Shared.Models
 {
-    public class Appointment
+    public class AppointmentModel
     {
         public int Id { get; set; }
         public string TelephoneNumber { get; set; }

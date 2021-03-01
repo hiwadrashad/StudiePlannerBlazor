@@ -18,7 +18,7 @@ namespace StudiePlannerBlazor.Shared.Models
         public DateTime EndDate { get; set; }
         public TaskStatus Status { get; set; }
         public string Notes { get; set; }
-        public Appointment Appointment { get; set; }
+        public AppointmentModel Appointment { get; set; }
         public List<string> Documents { get; set; }
 
     }
