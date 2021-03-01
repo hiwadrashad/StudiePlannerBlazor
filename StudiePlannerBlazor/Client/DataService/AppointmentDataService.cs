@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace StudiePlannerBlazor.Client.DataService
@@ -16,29 +17,38 @@ namespace StudiePlannerBlazor.Client.DataService
             _httpClient = httpClient;
         }
 
-        public AppointmentModel Add(AppointmentModel model)
+        public async Task<AppointmentModel> Add(AppointmentModel model)
         {
-            throw new NotImplementedException();
+            var modelJson = new StringContent(JsonSerializer.Serialize(model), System.Text.Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.PostAsync("api/Appointment", modelJson);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return await JsonSerializer.DeserializeAsync<AppointmentModel>(await response.Content.ReadAsStreamAsync());
+            }
+            return null;
         }
 
-        public AppointmentModel Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            await _httpClient.DeleteAsync($"api/Appointment/{id}");
         }
 
-        public AppointmentModel Update(AppointmentModel model)
+        public async  Task Update(AppointmentModel model)
         {
-            throw new NotImplementedException();
+            var modelJson = new StringContent(JsonSerializer.Serialize(model), System.Text.Encoding.UTF8, "application/json");
+            await _httpClient.PutAsync("api/Appointment", modelJson);
         }
 
-        public List<AppointmentModel> GetAll()
+        public async  Task<IEnumerable<AppointmentModel>> GetAll()
         {
-            throw new NotImplementedException();
+            return await JsonSerializer.DeserializeAsync<IEnumerable<AppointmentModel>>(await _httpClient.GetStreamAsync($"api/Appointment"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
         }
 
-        public AppointmentModel GetById(int id)
+        public async Task<AppointmentModel> GetById(int id)
         {
-            throw new NotImplementedException();
+            return await JsonSerializer.DeserializeAsync<AppointmentModel>(await _httpClient.GetStreamAsync($"api/Appointment/{id}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true }); ;
         }
     }
 }
