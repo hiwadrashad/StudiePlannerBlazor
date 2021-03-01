@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StudiePlannerBlazor.Server.Repositories;
+using StudiePlannerBlazor.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,36 +14,69 @@ namespace StudiePlannerBlazor.Server.Controllers
     [ApiController]
     public class TaskController : ControllerBase
     {
+        public readonly IRepository<TaskModel> _repository;
+
+        public TaskController(IRepository<TaskModel> repository)
+        {
+            _repository = repository;
+        }
+
         // GET: api/<TaskController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(_repository.GetAll());
         }
 
         // GET api/<TaskController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public TaskModel Get(int id)
         {
-            return "value";
+            return _repository.GetById(id);
         }
 
         // POST api/<TaskController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post([FromBody] TaskModel model)
         {
+            if (model == null)
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+            return Created("Task", _repository.Add(model));
         }
 
         // PUT api/<TaskController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, [FromBody] TaskModel model)
         {
+            if (model == null)
+                return BadRequest();
+
+            var item = _repository.GetById(model.Id);
+            if (item == null)
+                return NotFound();
+
+            _repository.Update(model);
+            return NoContent();
         }
 
         // DELETE api/<TaskController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            if (id == 0)
+                return BadRequest();
+
+            var model = _repository.GetById(id);
+
+            if (model == null)
+                return NotFound();
+
+            _repository.Delete(id);
+
+            return NoContent();
         }
     }
 }
