@@ -16,27 +16,27 @@ namespace StudiePlannerBlazor.Client.DataService
             _httpClient = httpClient;
         }
 
-        public TaskModel Add(TaskModel model)
+        public async Task<TaskModel> Add(TaskModel model)
         {
             throw new NotImplementedException();
         }
 
-        public TaskModel Delete(int id)
+        public async Task Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public List<TaskModel> GetAll()
+        public async Task<IEnumerable<TaskModel>> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public TaskModel GetById(int id)
+        public async Task<TaskModel> GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public TaskModel Update(TaskModel model)
+        public async Task Update(TaskModel model)
         {
             throw new NotImplementedException();
         }

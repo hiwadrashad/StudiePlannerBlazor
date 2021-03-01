@@ -16,27 +16,27 @@ namespace StudiePlannerBlazor.Client.DataService
             _httpClient = httpClient;
         }
 
-        public CalenderModel Add(CalenderModel model)
+        public async Task<CalenderModel> Add(CalenderModel model)
         {
             throw new NotImplementedException();
         }
 
-        public CalenderModel Delete(int id)
+        public async Task Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public CalenderModel Update(CalenderModel model)
+        public async Task<IEnumerable<CalenderModel>> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public List<CalenderModel> GetAll()
+        public async Task<CalenderModel> GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public CalenderModel GetById(int id)
+        public async Task Update(CalenderModel model)
         {
             throw new NotImplementedException();
         }
