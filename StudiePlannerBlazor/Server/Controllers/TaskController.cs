@@ -44,6 +44,7 @@ namespace StudiePlannerBlazor.Server.Controllers
                 {
                     return BadRequest(ModelState);
                 }
+
             return Created("Task", _repository.Add(model));
         }
 
@@ -75,7 +76,6 @@ namespace StudiePlannerBlazor.Server.Controllers
                 return NotFound();
 
             _repository.Delete(id);
-
             return NoContent();
         }
     }

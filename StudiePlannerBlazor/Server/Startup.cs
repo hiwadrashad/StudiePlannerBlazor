@@ -49,6 +49,8 @@ namespace StudiePlannerBlazor.Server
 
             services.AddScoped<IRepository<AppointmentModel>, AppointmentRepository>();
             services.AddScoped<IRepository<TaskModel>, TaskRepository>();
+            services.AddScoped<IRepository<CalenderModel>, CalenderRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
