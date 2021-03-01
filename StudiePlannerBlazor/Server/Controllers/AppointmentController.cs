@@ -14,9 +14,9 @@ namespace StudiePlannerBlazor.Server.Controllers
     [ApiController]
     public class AppointmentController : ControllerBase
     {
-        public readonly IRepository<Appointment> _repository;
+        public readonly IRepository<AppointmentModel> _repository;
 
-        public AppointmentController(IRepository<Appointment> repository)
+        public AppointmentController(IRepository<AppointmentModel> repository)
         {
             _repository = repository;
         }
@@ -29,23 +29,35 @@ namespace StudiePlannerBlazor.Server.Controllers
 
         // GET api/<AppointmentController>/5
         [HttpGet("{id}")]
-        public Appointment Get(int id)
+        public AppointmentModel Get(int id)
         {
             return _repository.GetById(id);
         }
 
         // POST api/<AppointmentController>
         [HttpPost]
-        public void Post([FromBody] Appointment model)
+        public IActionResult Post([FromBody] AppointmentModel model)
         {
             if (model == null)
-            return 
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+            return Created("Appointment", _repository.Add(model));
         }
 
         // PUT api/<AppointmentController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put([FromBody] AppointmentModel model)
         {
+            if (model == null)
+                return BadRequest(ModelState);
+
+            var item = _repository.GetById(model.Id);
+            if (item == null)
+                return NotFound();
+            _repository.Update(model);
+            return NoContent();
         }
 
         // DELETE api/<AppointmentController>/5
@@ -55,3 +67,4 @@ namespace StudiePlannerBlazor.Server.Controllers
         }
     }
 }
+
