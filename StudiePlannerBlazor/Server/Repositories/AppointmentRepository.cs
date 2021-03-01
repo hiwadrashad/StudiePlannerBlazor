@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace StudiePlannerBlazor.Server.Repositories
 {
 
-    public class AppointmentRepository
+    public class AppointmentRepository : IAppointmentRepository
     {
         private readonly ApplicationDBContext _ApplicationDbContext;
 
@@ -20,11 +20,11 @@ namespace StudiePlannerBlazor.Server.Repositories
             _ApplicationDbContext = appcontext;
         }
 
-        public bool AddAppointment(Appointment model)
+        public Appointment AddAppointment(Appointment model)
         {
             var addedEntity = _ApplicationDbContext.Add(model);
             _ApplicationDbContext.SaveChanges();
-            return true;
+            return addedEntity.Entity;
         }
 
         public void DeleteAppointment(int id)
@@ -36,6 +36,22 @@ namespace StudiePlannerBlazor.Server.Repositories
             _ApplicationDbContext.SaveChanges();
         }
 
-        public List<Appointment> GetAllAppointments
+        public List<Appointment> GetAllAppointments()
+        {
+            return _ApplicationDbContext.Appointments.ToList();
+        }
+
+        public Appointment GetAppointmentById(int id)
+        {
+            return _ApplicationDbContext.Appointments.FirstOrDefault(a => a.Id == id);
+        }
+
+        public Appointment UpdateAppointment(Appointment model)
+        {
+            var foundmodel = _ApplicationDbContext.Appointments.FirstOrDefault(a => a.Id == model.Id);
+            foundmodel = model;
+            _ApplicationDbContext.SaveChanges();
+            return foundmodel;
+        }
     }
 }
