@@ -1,59 +1,53 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using StudiePlannerBlazor.Server.DAL;
+﻿using StudiePlannerBlazor.Server.DAL;
 using StudiePlannerBlazor.Shared.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace StudiePlannerBlazor.Server.Repositories
 {
-
-    public class AppointmentRepository : IRepository<Appointment>
+    public class AppointmentRepository : IRepository<AppointmentModel>
     {
-        private readonly ApplicationDBContext _ApplicationDbContext;
+        private readonly ApplicationDBContext _applicationDbContext;
 
         public AppointmentRepository(ApplicationDBContext appcontext)
         {
-            _ApplicationDbContext = appcontext;
+            _applicationDbContext = appcontext;
         }
 
-        public Appointment Add(Appointment model)
+        public AppointmentModel Add(AppointmentModel model)
         {
-            var addedEntity = _ApplicationDbContext.Add(model);
-            _ApplicationDbContext.SaveChanges();
+            var addedEntity = _applicationDbContext.Appointments.Add(model);
+            _applicationDbContext.SaveChanges();
             return addedEntity.Entity;
         }
 
-        public Appointment Delete(int id)
+        public AppointmentModel Delete(int id)
         {
-            var foundModel = _ApplicationDbContext.Appointments.FirstOrDefault(a => a.Id == id);
+            var foundModel = _applicationDbContext.Appointments.FirstOrDefault(a => a.Id == id);
             if (foundModel == null) return null;
 
-            _ApplicationDbContext.Appointments.Remove(foundModel);
-            _ApplicationDbContext.SaveChanges();
+            _applicationDbContext.Appointments.Remove(foundModel);
+            _applicationDbContext.SaveChanges();
 
             return foundModel;
         }
 
-        public Appointment Update(Appointment model)
+        public AppointmentModel Update(AppointmentModel model)
         {
-            var foundModel = _ApplicationDbContext.Appointments.FirstOrDefault(a => a.Id == model.Id);
+            var foundModel = _applicationDbContext.Appointments.FirstOrDefault(a => a.Id == model.Id);
             foundModel = model;
-            _ApplicationDbContext.SaveChanges();
+            _applicationDbContext.SaveChanges();
             return foundModel;
         }
 
-        public List<Appointment> GetAll()
+        public List<AppointmentModel> GetAll()
         {
-            return _ApplicationDbContext.Appointments.ToList();
+            return _applicationDbContext.Appointments.ToList();
         }
 
-        public Appointment GetById(int id)
+        public AppointmentModel GetById(int id)
         {
-            return _ApplicationDbContext.Appointments.FirstOrDefault(a => a.Id == id);
+            return _applicationDbContext.Appointments.FirstOrDefault(a => a.Id == id);
         }
     }
 }
