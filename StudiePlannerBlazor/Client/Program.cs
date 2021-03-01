@@ -27,14 +27,14 @@ namespace StudiePlannerBlazor.Client
             builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("StudiePlannerBlazor.ServerAPI"));
 
             Uri uri = new Uri("https://localhost:");
-            builder.Services.AddHttpClient<IDataService<TaskModel>, TaskDataService>(client =>
-            {
-                client.BaseAddress = uri;
-            });
-            builder.Services.AddHttpClient<IDataService<CalenderModel>, CalenderDataService>(client =>
-            {
-                client.BaseAddress = uri;
-            });
+            //builder.Services.AddHttpClient<IDataService<TaskModel>, TaskDataService>(client =>
+            //{
+            //    client.BaseAddress = uri;
+            //});
+            //builder.Services.AddHttpClient<IDataService<CalenderModel>, CalenderDataService>(client =>
+            //{
+            //    client.BaseAddress = uri;
+            //});
             builder.Services.AddHttpClient<IDataService<AppointmentModel>, AppointmentDataService>(client =>
             {
                 client.BaseAddress = uri;

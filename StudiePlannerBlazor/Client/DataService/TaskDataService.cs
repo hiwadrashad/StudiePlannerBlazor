@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StudiePlannerBlazor.Client.DataService
 {
-    public class TaskDataService : IDataService<TaskModel>
+    public class TaskDataService /*: IDataService<TaskModel>*/
     {
         private readonly HttpClient _httpClient;
 
