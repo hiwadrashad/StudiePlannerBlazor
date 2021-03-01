@@ -1,7 +1,7 @@
-﻿using StudiePlannerBlazor.Shared.Models;
+﻿using StudiePlannerBlazor.Server.Data;
+using StudiePlannerBlazor.Shared.Models;
 using System;
 using System.Collections.Generic;
-using StudiePlannerBlazor.Server.DAL;
 using System.Linq;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -10,9 +10,9 @@ namespace StudiePlannerBlazor.Server.Repositories
 {
     public class CalenderRepository : IRepository<CalenderModel>
     {
-        private readonly ApplicationDBContext _applicationDbContext;
+        private readonly ApplicationDbContext _applicationDbContext;
 
-        public CalenderRepository(ApplicationDBContext appcontext)
+        public CalenderRepository(ApplicationDbContext appcontext)
         {
             _applicationDbContext = appcontext;
         }
