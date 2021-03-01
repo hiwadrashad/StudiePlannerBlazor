@@ -1,4 +1,4 @@
-﻿using StudiePlannerBlazor.Server.DAL;
+﻿using StudiePlannerBlazor.Server.Data;
 using StudiePlannerBlazor.Shared.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +7,9 @@ namespace StudiePlannerBlazor.Server.Repositories
 {
     public class TaskRepository : IRepository<TaskModel>
     {
-        private readonly ApplicationDBContext _applicationDbContext;
+        private readonly ApplicationDbContext _applicationDbContext;
 
-        public TaskRepository(ApplicationDBContext appcontext)
+        public TaskRepository(ApplicationDbContext appcontext)
         {
             _applicationDbContext = appcontext;
         }

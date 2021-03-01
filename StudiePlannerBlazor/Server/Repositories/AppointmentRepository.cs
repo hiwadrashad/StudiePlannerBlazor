@@ -1,4 +1,4 @@
-﻿using StudiePlannerBlazor.Server.DAL;
+﻿using StudiePlannerBlazor.Server.Data;
 using StudiePlannerBlazor.Shared.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +7,9 @@ namespace StudiePlannerBlazor.Server.Repositories
 {
     public class AppointmentRepository : IRepository<AppointmentModel>
     {
-        private readonly ApplicationDBContext _applicationDbContext;
+        private readonly ApplicationDbContext _applicationDbContext;
 
-        public AppointmentRepository(ApplicationDBContext appcontext)
+        public AppointmentRepository(ApplicationDbContext appcontext)
         {
             _applicationDbContext = appcontext;
         }
