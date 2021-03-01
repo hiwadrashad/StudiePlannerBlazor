@@ -47,9 +47,9 @@ namespace StudiePlannerBlazor.Server
             services.AddControllersWithViews();
             services.AddRazorPages();
 
-            //services.AddScoped<IRepository<AppointmentModel>, AppointmentRepository>();
-            //services.AddScoped<IRepository<TaskModel>, TaskRepository>();
-            //services.AddScoped<IRepository<CalenderModel>, CalenderRepository>();
+            services.AddScoped<IRepository<AppointmentModel>, AppointmentRepository>();
+            services.AddScoped<IRepository<TaskModel>, TaskRepository>();
+            services.AddScoped<IRepository<CalenderModel>, CalenderRepository>();
 
         }
 
