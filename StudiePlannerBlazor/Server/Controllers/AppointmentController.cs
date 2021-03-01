@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StudiePlannerBlazor.Server.Repositories;
+using StudiePlannerBlazor.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,25 +14,32 @@ namespace StudiePlannerBlazor.Server.Controllers
     [ApiController]
     public class AppointmentController : ControllerBase
     {
-        
+        public readonly IRepository<Appointment> _repository;
+
+        public AppointmentController(IRepository<Appointment> repository)
+        {
+            _repository = repository;
+        }
         // GET: api/<AppointmentController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(_repository.GetAll());
         }
 
         // GET api/<AppointmentController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Appointment Get(int id)
         {
-            return "value";
+            return _repository.GetById(id);
         }
 
         // POST api/<AppointmentController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Appointment model)
         {
+            if (model == null)
+            return 
         }
 
         // PUT api/<AppointmentController>/5
