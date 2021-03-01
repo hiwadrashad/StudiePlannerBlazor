@@ -1,47 +1,56 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using StudiePlannerBlazor.Shared.Models;
 using System;
 using System.Collections.Generic;
+using StudiePlannerBlazor.Server.DAL;
 using System.Linq;
-using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace StudiePlannerBlazor.Server.Repositories
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CalenderRepository : ControllerBase
+    public class CalenderRepository : IRepository<CalenderModel>
     {
-        // GET: api/<CalenderRepository>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly ApplicationDBContext _applicationDbContext;
+
+        public CalenderRepository(ApplicationDBContext appcontext)
         {
-            return new string[] { "value1", "value2" };
+            _applicationDbContext = appcontext;
         }
 
-        // GET api/<CalenderRepository>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        public CalenderModel Add(CalenderModel model)
         {
-            return "value";
+            var addedEntity = _applicationDbContext.Calenders.Add(model);
+            _applicationDbContext.SaveChanges();
+            return addedEntity.Entity;
         }
 
-        // POST api/<CalenderRepository>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        public CalenderModel Delete(int id)
         {
+            var foundModel = _applicationDbContext.Calenders.FirstOrDefault(a => a.Id == id);
+            if (foundModel == null) return null;
+
+            _applicationDbContext.Calenders.Remove(foundModel);
+            _applicationDbContext.SaveChanges();
+
+            return foundModel;
         }
 
-        // PUT api/<CalenderRepository>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public CalenderModel Update(CalenderModel model)
         {
+            var foundModel = _applicationDbContext.Calenders.FirstOrDefault(a => a.Id == model.Id);
+            foundModel = model;
+            _applicationDbContext.SaveChanges();
+            return foundModel;
         }
 
-        // DELETE api/<CalenderRepository>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        public List<CalenderModel> GetAll()
         {
+            return _applicationDbContext.Calenders.ToList();
+        }
+
+        public CalenderModel GetById(int id)
+        {
+            return _applicationDbContext.Calenders.FirstOrDefault(a => a.Id == id);
         }
     }
 }
