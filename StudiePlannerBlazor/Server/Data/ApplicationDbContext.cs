@@ -30,6 +30,23 @@ namespace StudiePlannerBlazor.Server.Data
             builder.Entity<IdentityUserLogin>().HasKey(m => m.UserId);
             builder.Entity<IdentityUserRole>().HasKey(m => m.UserId);
             base.OnModelCreating(builder);
+
+            builder.Entity<TaskModel>().HasData(new TaskModel
+            {
+                Id = 19,
+                Name = "Work order for March",
+                StartDate = DateTime.ParseExact("01/03/2021", "dd/MM/yyyy", null),
+                EndDate = DateTime.ParseExact("01/04/2021", "dd/MM/yyyy", null),
+                Status = Shared.Models.TaskStatus.Busy
+            });
+            builder.Entity<TaskModel>().HasData(new TaskModel
+            {
+                Id = 20,
+                Name = "Work order for February",
+                StartDate = DateTime.ParseExact("01/02/2021", "dd/MM/yyyy", null),
+                EndDate = DateTime.ParseExact("01/03/2021", "dd/MM/yyyy", null),
+                Status = Shared.Models.TaskStatus.Done
+            });
         }
     }
 }
