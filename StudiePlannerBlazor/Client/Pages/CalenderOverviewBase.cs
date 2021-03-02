@@ -11,6 +11,10 @@ namespace StudiePlannerBlazor.Client.Pages
     public partial class CalenderOverviewBase : ComponentBase
     {
         [Inject]
+        public IDataService<CalenderModel> CalenderDataService { get; set; }
+        //public IdentityUser User { get; set; }
+
+        [Inject]
         public IDataService<TaskModel> TaskDataService { get; set; }
         public List<TaskModel> Tasks { get; set; }
 
