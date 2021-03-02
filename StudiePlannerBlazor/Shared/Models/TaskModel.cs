@@ -19,7 +19,7 @@ namespace StudiePlannerBlazor.Shared.Models
         public TaskStatus Status { get; set; }
         public string Notes { get; set; }
         public AppointmentModel Appointment { get; set; }
-        public List<string> Documents { get; set; }
+        public IEnumerable<DocumentModel> Documents { get; set; }
 
     }
 }
