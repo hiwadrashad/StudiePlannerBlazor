@@ -1,7 +1,35 @@
-﻿
+﻿@page "/calenderoverview"
+@inherits CalenderOverviewBase
 
-<h3>CalenderOverview</h3>
+<h1 class="page-title">All tasks</h1>
 
-@code {
-
+@if (Tasks == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Task ID</th>
+                <th>Name</th>
+                <th>Start date</th>
+                <th>End date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var task in Tasks)
+            {
+                <tr>
+                    <td>@task.Id</td>
+                    <td>@task.Name</td>
+                    <td>@task.StartDate.ToShortDateString()</td>
+                    <td>@task.EndDate.ToShortDateString()</td>
+                    <td>@task.Status</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }

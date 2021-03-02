@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace StudiePlannerBlazor.Client.Pages
 {
-    public partial class CalenderOverview
+    public partial class CalenderOverviewBase : ComponentBase
     {
         [Inject]
         public IDataService<TaskModel> TaskDataService { get; set; }

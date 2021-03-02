@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudiePlannerBlazor.Server.Data;
 
-namespace StudiePlannerBlazor.Server.Data.Migrations
+namespace StudiePlannerBlazor.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -509,19 +509,19 @@ namespace StudiePlannerBlazor.Server.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 19,
-                            EndDate = new DateTime(2021, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Work order for March",
-                            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 20,
+                            Id = 1,
                             EndDate = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Work order for February",
                             StartDate = new DateTime(2021, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 2
+                        },
+                        new
+                        {
+                            Id = 2,
+                            EndDate = new DateTime(2021, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Work order for March",
+                            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 1
                         });
                 });
 
