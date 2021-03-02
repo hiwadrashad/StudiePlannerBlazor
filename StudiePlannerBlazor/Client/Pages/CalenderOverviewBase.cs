@@ -27,6 +27,8 @@ namespace StudiePlannerBlazor.Client.Pages
             time.Start();
 
             Tasks = (await TaskDataService.GetAll()).ToList();
+            taskstartednotification.ShowDialog = true;
+
         }
 
         protected void ShowMessageStart()
