@@ -16,17 +16,17 @@ namespace StudiePlannerBlazor.Client.Components
         public TaskModel CurrentTask { get; set; } = new TaskModel { Appointment = new AppointmentModel() { } };
 
         [Inject]
-        public IDataService<AppointmentModel> _AppointmentDataService { get; set; }
+        public IDataService<AppointmentModel> AppointmentDataService { get; set; }
         [Inject]
-        public IDataService<CalenderModel> _CalenderDataService { get; set; }
+        public IDataService<CalenderModel> CalenderDataService { get; set; }
         [Inject]
-        public IDataService<TaskModel> _TaskDataService { get; set; }
+        public IDataService<TaskModel> TaskDataService { get; set; }
         [Inject]
-        public NavigationManager navmanger { get; set; }
+        public NavigationManager Navmanger { get; set; }
 
         public async void AddTask()
         {
-            await _TaskDataService.Add(CurrentTask);
+            await TaskDataService.Add(CurrentTask);
             Close();
         }
 

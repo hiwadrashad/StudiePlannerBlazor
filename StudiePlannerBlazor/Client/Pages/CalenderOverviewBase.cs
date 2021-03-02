@@ -16,59 +16,58 @@ namespace StudiePlannerBlazor.Client.Pages
         public IDataService<TaskModel> TaskDataService { get; set; }
         public List<TaskModel> Tasks { get; set; }
         private Timer time;
-        protected NotificationComponentStart taskstartednotification { get; set; } = new NotificationComponentStart { ShowDialog = false};
-        protected NotificationComponentEnd tasksendednotification { get; set; } = new NotificationComponentEnd { ShowDialog = false };
+        protected NotificationComponentStart Taskstartednotification { get; set; } = new NotificationComponentStart { ShowDialog = false};
+        protected NotificationComponentEnd Tasksendednotification { get; set; } = new NotificationComponentEnd { ShowDialog = false };
 
         protected override async Task OnInitializedAsync()
         {
             time = new Timer();
-            time.Elapsed += new System.Timers.ElapsedEventHandler(timerexecutioncode);
+            time.Elapsed += new System.Timers.ElapsedEventHandler(Timerexecutioncode);
             time.Interval = 60000;
             time.Start();
 
             Tasks = (await TaskDataService.GetAll()).ToList();
-            taskstartednotification.ShowDialog = true;
-
+            Taskstartednotification.ShowDialog = true;
         }
 
         protected void ShowMessageStart()
         {
-            taskstartednotification.ShowDialog = true;
+            Taskstartednotification.ShowDialog = true;
             StateHasChanged();
         }
 
         protected void CancelMessageStart()
         {
-            taskstartednotification.ShowDialog = false;
+            Taskstartednotification.ShowDialog = false;
             StateHasChanged();
         }
 
         protected void ShowMessageEnd()
         {
-            tasksendednotification.ShowDialog = true;
+            Tasksendednotification.ShowDialog = true;
             StateHasChanged();
         }
 
         protected void CancelMessageEnd()
         {
-            tasksendednotification.ShowDialog = false;
+            Tasksendednotification.ShowDialog = false;
             StateHasChanged();
         }
-        private async void timerexecutioncode(object sender, EventArgs e)
+        private async void Timerexecutioncode(object sender, EventArgs e)
         {
             var items = await TaskDataService.GetAll();
             if (items.Where(a => a.StartDate == DateTime.Now).Any())
             {
                 var itemtoshow = items.Where(a => a.StartDate == DateTime.Now).FirstOrDefault();
                 string texttoshow = itemtoshow.Name = " " + "has started";
-                taskstartednotification.TextToShow = texttoshow;
+                Taskstartednotification.TextToShow = texttoshow;
                 ShowMessageStart();
             }
-            if (taskstartednotification.ShowDialog == false)
+            if (Taskstartednotification.ShowDialog == false)
             {
                 var itemtoshow = items.Where(a => a.EndDate == DateTime.Now).FirstOrDefault();
                 string texttoshow = itemtoshow.Name = " " + "has ended";
-                tasksendednotification.TextToShow = texttoshow;
+                Tasksendednotification.TextToShow = texttoshow;
                 ShowMessageEnd();
             }
         }
