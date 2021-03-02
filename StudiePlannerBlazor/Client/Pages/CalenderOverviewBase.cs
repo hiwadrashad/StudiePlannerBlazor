@@ -16,7 +16,7 @@ namespace StudiePlannerBlazor.Client.Pages
         public IDataService<TaskModel> TaskDataService { get; set; }
         public List<TaskModel> Tasks { get; set; }
         private Timer time;
-        protected NotificationComponentStart taskstartednotification { get; set; } = new NotificationComponentStart { ShowDialog = false};
+        protected NotificationComponentStart taskstartednotification { get; set; } = new NotificationComponentStart { ShowDialog = false };
         protected NotificationComponentEnd tasksendednotification { get; set; } = new NotificationComponentEnd { ShowDialog = false };
 
         protected override async Task OnInitializedAsync()
@@ -69,6 +69,19 @@ namespace StudiePlannerBlazor.Client.Pages
                 tasksendednotification.TextToShow = texttoshow;
                 ShowMessageEnd();
             }
+        }
+
+        protected AddComponent _AddComponent { get; set; }
+
+        public async void AddTask_OnDialogClose()
+        {
+            Tasks = (await TaskDataService.GetAll()).ToList();
+            StateHasChanged();
+        }
+
+        protected void AddTask()
+        {
+            _AddComponent.Show();
         }
     }
 }

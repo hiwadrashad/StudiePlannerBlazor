@@ -33,18 +33,21 @@ else
         </tbody>
     </table>
 }
-@if (taskstartednotification.ShowDialog == true)
-{
-<StudiePlannerBlazor.Client.Components.NotificationComponentStart  >
 
-</StudiePlannerBlazor.Client.Components.NotificationComponentStart>
-}
-@if (tasksendednotification.ShowDialog == true)
-{ 
-<StudiePlannerBlazor.Client.Components.NotificationComponentEnd>
+<button @onclick="@AddTask" class="btn btn-dark teble-btn quick-add-btn">&nbsp;&nbsp;+&nbsp;&nbsp;</button>
 
-</StudiePlannerBlazor.Client.Components.NotificationComponentEnd>
-}
-@code {
+<StudiePlannerBlazor.Client.Components.AddComponent @ref="_AddComponent"></StudiePlannerBlazor.Client.Components.AddComponent>
 
-}
+@*@if (taskstartednotification.ShowDialog == true)
+    {
+        <StudiePlannerBlazor.Client.Components.NotificationComponentStart>
+
+        </StudiePlannerBlazor.Client.Components.NotificationComponentStart>
+    }
+    @if (tasksendednotification.ShowDialog == true)
+    {
+        <StudiePlannerBlazor.Client.Components.NotificationComponentEnd>
+
+        </StudiePlannerBlazor.Client.Components.NotificationComponentEnd>
+    }*@
+
