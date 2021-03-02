@@ -1,7 +1,13 @@
-﻿
+﻿@page "/"
+
 
 <h3>CalenderOverview</h3>
+@if (taskstartednotification.ShowDialog == true)
+{
+<StudiePlannerBlazor.Client.Components.AddComponent  >
 
+</StudiePlannerBlazor.Client.Components.AddComponent>
+}
 @code {
 
 }
