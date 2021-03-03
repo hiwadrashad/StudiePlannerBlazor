@@ -27,9 +27,12 @@ namespace StudiePlannerBlazor.Client.Pages
             //time.Elapsed += new System.Timers.ElapsedEventHandler(Timerexecutioncode);
             //time.Interval = 60000;
             //time.Start();
+
+            //<summary> apply list of logged in identity instead of all stored tasks / get identity running first
             //var users = await CalenderDataService.GetAll();
             //var currentuser = users.Where(a => a.User.Email == StaticResources.CurrentIdentityUser.identityUser.Email).FirstOrDefault();
             //Tasks = currentuser.Tasks;
+            //<summary>
             Tasks = (await TaskDataService.GetAll()).ToList();
             //Taskstartednotification.ShowDialog = true;
         }

@@ -1,6 +1,52 @@
 ﻿@page "/deletetask"
 @page "/deletetask/{id}"
+@using Microsoft.AspNetCore.Components;
+@using StudiePlannerBlazor.Client.DataService;
+@using StudiePlannerBlazor.Shared.Models;
+@using System;
+@using System.Collections.Generic;
+@using System.Linq;
+@using System.Threading.Tasks;
+<EditForm Model="model" OnValidSubmit="DeletingTask">
+
+    <button type="submit" class="btn btn-primary">Are you sure you want to remove this task?</button>
+</EditForm>
 
 @code {
+    [Inject]
+    public IDataService<TaskModel> TaskDataService { get; set; }
+    [Inject]
+    public IDataService<AppointmentModel> AppointmentDataService { get; set; }
+    [Inject]
+    public IDataService<CalenderModel> CalenderDataService { get; set; }
+    [Inject]
+    public NavigationManager NavManager { get; set; }
+    public TaskModel model { get; set; } = new TaskModel { Appointment = new AppointmentModel { } };
 
+    [Parameter]
+    public int id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        model = await TaskDataService.GetById(id);
+
+        //<summary> apply list of logged in identity instead of all stored tasks / get identity running first
+        //var allacounts = await CalenderDataService.GetAll();
+        //var currentaccount = allacounts.Where(a => a.User.Email == StaticResources.CurrentIdentityUser.identityUser.Email).FirstOrDefault();
+        //model = currentaccount.Tasks.Where(a => a.Id == id).FirstOrDefault();
+        //<summary>
+    }
+    public async void DeletingTask()
+    {
+        await TaskDataService.Delete(model.Id);
+
+        //<summary> apply list of logged in identity instead of all stored tasks / get identity running first
+        //var allaccounts = await CalenderDataService.GetAll();
+        //var currentaccount = allaccounts.Where(a => a.User.Email == StaticResources.CurrentIdentityUser.identityUser.Email).FirstOrDefault();
+        //currentaccount.Tasks.Remove(model);
+        //await CalenderDataService.Update(currentaccount);
+        //<summary>
+
+        NavManager.NavigateTo("/succesfullydeletedtask");
+    }
 }

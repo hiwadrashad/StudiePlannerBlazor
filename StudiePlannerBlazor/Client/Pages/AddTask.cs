@@ -11,15 +11,6 @@ namespace StudiePlannerBlazor.Client.Pages
 {
     public partial class AddTask
     {
-        [Inject]
-        public IDataService<TaskModel> TaskDataService { get; set; }
-        [Inject]
-        public IDataService<AppointmentModel> AppointmentDataService { get; set; }
-        [Inject]
-        public IDataService<CalenderModel> CalenderDataService { get; set; }
-        [Inject]
-        public NavigationManager NavManager { get; set; }
-        public TaskModel model { get; set; } = new TaskModel { Appointment = new AppointmentModel { } };
 
     }
 }
