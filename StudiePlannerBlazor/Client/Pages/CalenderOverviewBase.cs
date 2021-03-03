@@ -14,20 +14,24 @@ namespace StudiePlannerBlazor.Client.Pages
     {
         [Inject]
         public IDataService<TaskModel> TaskDataService { get; set; }
-        public List<TaskModel> Tasks { get; set; }
+        [Inject]
+        public IDataService<CalenderModel> CalenderDataService { get; set; }
+        public List<TaskModel> Tasks { get; set; } = new List<TaskModel> { };
         private Timer time;
         protected NotificationComponentStart Taskstartednotification { get; set; } = new NotificationComponentStart { ShowDialog = false};
         protected NotificationComponentEnd Tasksendednotification { get; set; } = new NotificationComponentEnd { ShowDialog = false };
 
         protected override async Task OnInitializedAsync()
         {
-            time = new Timer();
-            time.Elapsed += new System.Timers.ElapsedEventHandler(Timerexecutioncode);
-            time.Interval = 60000;
-            time.Start();
-
+            //time = new Timer();
+            //time.Elapsed += new System.Timers.ElapsedEventHandler(Timerexecutioncode);
+            //time.Interval = 60000;
+            //time.Start();
+            //var users = await CalenderDataService.GetAll();
+            //var currentuser = users.Where(a => a.User.Email == StaticResources.CurrentIdentityUser.identityUser.Email).FirstOrDefault();
+            //Tasks = currentuser.Tasks;
             Tasks = (await TaskDataService.GetAll()).ToList();
-            Taskstartednotification.ShowDialog = true;
+            //Taskstartednotification.ShowDialog = true;
         }
 
         protected void ShowMessageStart()

@@ -85,6 +85,8 @@ namespace StudiePlannerBlazor.Server.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
+                    //Client.StaticResources.CurrentIdentityUser.identityUser = await _userManager.FindByNameAsync(Input.Email) as IdentityUser;
+                    
                 }
                 if (result.RequiresTwoFactor)
                 {

@@ -9,6 +9,9 @@
 }
 else
 {
+    <a href="@($"addtask")" class="btn btn-primary table-btn">
+        add task
+    </a>
     <table class="table">
         <thead>
             <tr>
@@ -17,33 +20,53 @@ else
                 <th>Start date</th>
                 <th>End date</th>
                 <th>Status</th>
+                <th></th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var task in Tasks)
             {
-                <tr>
-                    <td>@task.Id</td>
-                    <td>@task.Name</td>
-                    <td>@task.StartDate.ToShortDateString()</td>
-                    <td>@task.EndDate.ToShortDateString()</td>
-                    <td>@task.Status</td>
-                </tr>
+            <tr>
+                <td>@task.Id</td>
+                <td>@task.Name</td>
+                <td>@task.StartDate.ToShortDateString()</td>
+                <td>@task.EndDate.ToShortDateString()</td>
+                <td>@task.Status</td>
+                <td>
+                </td>
+                <td>
+                    <a href="@($"deletetask/{task.Id}")" class="btn btn-primary table-btn">
+                        delete task
+                    </a>
+                </td>
+                <td>
+                    <a href="@($"edittask/{task.Id}")" class="btn btn-primary table-btn">
+                        add task
+                    </a>
+                </td>
+                <td>
+                    <a href="@($"taskdetails/{task.Id}")" class="btn btn-primary table-btn">
+                        see details
+                    </a>
+                </td>
+            </tr>
             }
         </tbody>
     </table>
 }
 @if (Taskstartednotification.ShowDialog == true)
 {
-<StudiePlannerBlazor.Client.Components.NotificationComponentStart  >
+    <StudiePlannerBlazor.Client.Components.NotificationComponentStart>
 
-</StudiePlannerBlazor.Client.Components.NotificationComponentStart>
+    </StudiePlannerBlazor.Client.Components.NotificationComponentStart>
 }
 @if (Tasksendednotification.ShowDialog == true)
-{ 
-<StudiePlannerBlazor.Client.Components.NotificationComponentEnd>
+{
+    <StudiePlannerBlazor.Client.Components.NotificationComponentEnd>
 
-</StudiePlannerBlazor.Client.Components.NotificationComponentEnd>
+    </StudiePlannerBlazor.Client.Components.NotificationComponentEnd>
 }
 @code {
 

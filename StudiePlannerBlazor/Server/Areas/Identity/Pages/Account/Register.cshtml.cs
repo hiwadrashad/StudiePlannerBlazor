@@ -46,6 +46,7 @@ namespace StudiePlannerBlazor.Server.Areas.Identity.Pages.Account
 
         public class InputModel
         {
+            
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
@@ -70,7 +71,8 @@ namespace StudiePlannerBlazor.Server.Areas.Identity.Pages.Account
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
-        {
+        { 
+           
             returnUrl = returnUrl ?? Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
