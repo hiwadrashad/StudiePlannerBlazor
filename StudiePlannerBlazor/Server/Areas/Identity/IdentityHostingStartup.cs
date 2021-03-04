@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StudiePlannerBlazor.Server.Data;
-using StudiePlannerBlazor.Server.Models;
+using StudiePlannerBlazor.Shared.Models;
 
 [assembly: HostingStartup(typeof(StudiePlannerBlazor.Server.Areas.Identity.IdentityHostingStartup))]
 namespace StudiePlannerBlazor.Server.Areas.Identity

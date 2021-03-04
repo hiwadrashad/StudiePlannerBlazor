@@ -55,7 +55,7 @@ namespace StudiePlannerBlazor.Server.Controllers
             if (model == null)
                 return BadRequest();
 
-            var item = _repository.GetById(model.Id);
+            var item = _repository.GetById(model.CalenderId);
             if (item == null)
                 return NotFound();
 

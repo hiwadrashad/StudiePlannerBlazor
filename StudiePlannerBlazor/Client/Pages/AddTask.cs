@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using StudiePlannerBlazor.Client.DataService;
 using StudiePlannerBlazor.Shared.Models;
 using System;
