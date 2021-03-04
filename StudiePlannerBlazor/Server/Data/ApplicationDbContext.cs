@@ -1,10 +1,9 @@
 ﻿using IdentityServer4.EntityFramework.Options;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using StudiePlannerBlazor.Server.Models;
 using StudiePlannerBlazor.Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -28,32 +27,50 @@ namespace StudiePlannerBlazor.Server.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<IdentityUserLogin>().HasKey(m => m.UserId);
-            builder.Entity<IdentityUserRole>().HasKey(m => m.UserId);
+            //builder.Entity<IdentityUserLogin>().HasKey(m => m.UserId);
+            //builder.Entity<IdentityUserRole>().HasKey(m => m.UserId);
             base.OnModelCreating(builder);
 
+            //builder.Entity<IdentityUser>().HasData(new IdentityUser
+            //{
+            //    Id = Guid.NewGuid().ToString(),
+            //    Email = "test@hotmail.com",
+            //    UserName = "test@hotmail.com"
+            //});
 
             builder.Entity<CalenderModel>().HasData(new CalenderModel
             {
-                Id = 3,
+                CalenderId = 1,
+                
+                //Tasks = new List<TaskModel>()
+                //{
+                //    new TaskModel
+                //    {
+                //        Id = 4,
+                //        Name = "Work order for February",
+                //        StartDate = DateTime.ParseExact("01/02/2021", "dd/MM/yyyy", null),
+                //        EndDate = DateTime.ParseExact("01/03/2021", "dd/MM/yyyy", null),
+                //        Status = Shared.Models.TaskStatus.Done
+                //    },
+                //    new TaskModel
+                //    {
+                //        Id = 5,
+                //        Name = "Work order for March",
+                //        StartDate = DateTime.ParseExact("01/03/2021", "dd/MM/yyyy", null),
+                //        EndDate = DateTime.ParseExact("01/04/2021", "dd/MM/yyyy", null),
+                //        Status = Shared.Models.TaskStatus.Busy
+                //    }
+                //},
 
-                Tasks = new List<TaskModel> { new TaskModel {
-                Id = 4,
-                Name = "Work order for February",
-                StartDate = DateTime.ParseExact("01/02/2021", "dd/MM/yyyy", null),
-                EndDate = DateTime.ParseExact("01/03/2021", "dd/MM/yyyy", null),
-                Status = Shared.Models.TaskStatus.Done },
-               new TaskModel {
-                Id = 5,
-                Name = "Work order for March",
-                StartDate = DateTime.ParseExact("01/03/2021", "dd/MM/yyyy", null),
-                EndDate = DateTime.ParseExact("01/04/2021", "dd/MM/yyyy", null),
-                Status = Shared.Models.TaskStatus.Busy}  },
+                //User = Users.FirstOrDefault(l => l.UserName == "test@hotmail.com")
+
                 //User = new IdentityUser { Id = Guid.NewGuid().ToString(), Email = "test@hotmail.com", UserName = "test@hotmail.com" }
-            }); ;
+
+            });
             builder.Entity<TaskModel>().HasData(new TaskModel
             {
                 Id = 1,
+                CalenderId = 1,
                 Name = "Work order for February",
                 StartDate = DateTime.ParseExact("01/02/2021", "dd/MM/yyyy", null),
                 EndDate = DateTime.ParseExact("01/03/2021", "dd/MM/yyyy", null),
@@ -62,6 +79,7 @@ namespace StudiePlannerBlazor.Server.Data
             builder.Entity<TaskModel>().HasData(new TaskModel
             {
                 Id = 2,
+                CalenderId = 1,
                 Name = "Work order for March",
                 StartDate = DateTime.ParseExact("01/03/2021", "dd/MM/yyyy", null),
                 EndDate = DateTime.ParseExact("01/04/2021", "dd/MM/yyyy", null),

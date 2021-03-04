@@ -11,9 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StudiePlannerBlazor.Server.Data;
-using StudiePlannerBlazor.Server.Models;
-using StudiePlannerBlazor.Server.Repositories;
 using StudiePlannerBlazor.Shared.Models;
+using StudiePlannerBlazor.Server.Repositories;
 using System.Linq;
 
 namespace StudiePlannerBlazor.Server

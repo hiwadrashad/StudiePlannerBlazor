@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudiePlannerBlazor.Server.Data;
 
 namespace StudiePlannerBlazor.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210303115359_intial updat")]
-    partial class intialupdat
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,114 +99,6 @@ namespace StudiePlannerBlazor.Server.Migrations
                     b.HasIndex("SubjectId", "ClientId", "Type");
 
                     b.ToTable("PersistedGrants");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LockoutEndDateUtc")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("IdentityUser");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IdentityUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdentityUserId");
-
-                    b.ToTable("IdentityUserClaim");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserLogin", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("IdentityUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserId");
-
-                    b.HasIndex("IdentityUserId");
-
-                    b.ToTable("IdentityUserLogin");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserRole", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("IdentityUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserId");
-
-                    b.HasIndex("IdentityUserId");
-
-                    b.ToTable("IdentityUserRole");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -346,7 +236,7 @@ namespace StudiePlannerBlazor.Server.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("StudiePlannerBlazor.Server.Models.ApplicationUser", b =>
+            modelBuilder.Entity("StudiePlannerBlazor.Shared.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -437,7 +327,7 @@ namespace StudiePlannerBlazor.Server.Migrations
 
             modelBuilder.Entity("StudiePlannerBlazor.Shared.Models.CalenderModel", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CalenderId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -445,11 +335,17 @@ namespace StudiePlannerBlazor.Server.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Id");
+                    b.HasKey("CalenderId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("Calenders");
+
+                    b.HasData(
+                        new
+                        {
+                            CalenderId = 1
+                        });
                 });
 
             modelBuilder.Entity("StudiePlannerBlazor.Shared.Models.DocumentModel", b =>
@@ -482,7 +378,10 @@ namespace StudiePlannerBlazor.Server.Migrations
                     b.Property<int?>("AppointmentId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CalenderModelId")
+                    b.Property<int>("CalenderId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CalenderModelCalenderId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("EndDate")
@@ -504,7 +403,7 @@ namespace StudiePlannerBlazor.Server.Migrations
 
                     b.HasIndex("AppointmentId");
 
-                    b.HasIndex("CalenderModelId");
+                    b.HasIndex("CalenderModelCalenderId");
 
                     b.ToTable("Tasks");
 
@@ -512,6 +411,7 @@ namespace StudiePlannerBlazor.Server.Migrations
                         new
                         {
                             Id = 1,
+                            CalenderId = 1,
                             EndDate = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Work order for February",
                             StartDate = new DateTime(2021, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -520,32 +420,12 @@ namespace StudiePlannerBlazor.Server.Migrations
                         new
                         {
                             Id = 2,
+                            CalenderId = 1,
                             EndDate = new DateTime(2021, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Work order for March",
                             StartDate = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 1
                         });
-                });
-
-            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim", b =>
-                {
-                    b.HasOne("Microsoft.AspNet.Identity.EntityFramework.IdentityUser", null)
-                        .WithMany("Claims")
-                        .HasForeignKey("IdentityUserId");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserLogin", b =>
-                {
-                    b.HasOne("Microsoft.AspNet.Identity.EntityFramework.IdentityUser", null)
-                        .WithMany("Logins")
-                        .HasForeignKey("IdentityUserId");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserRole", b =>
-                {
-                    b.HasOne("Microsoft.AspNet.Identity.EntityFramework.IdentityUser", null)
-                        .WithMany("Roles")
-                        .HasForeignKey("IdentityUserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -559,7 +439,7 @@ namespace StudiePlannerBlazor.Server.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("StudiePlannerBlazor.Server.Models.ApplicationUser", null)
+                    b.HasOne("StudiePlannerBlazor.Shared.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -568,7 +448,7 @@ namespace StudiePlannerBlazor.Server.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("StudiePlannerBlazor.Server.Models.ApplicationUser", null)
+                    b.HasOne("StudiePlannerBlazor.Shared.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -583,7 +463,7 @@ namespace StudiePlannerBlazor.Server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("StudiePlannerBlazor.Server.Models.ApplicationUser", null)
+                    b.HasOne("StudiePlannerBlazor.Shared.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -592,7 +472,7 @@ namespace StudiePlannerBlazor.Server.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("StudiePlannerBlazor.Server.Models.ApplicationUser", null)
+                    b.HasOne("StudiePlannerBlazor.Shared.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -601,7 +481,7 @@ namespace StudiePlannerBlazor.Server.Migrations
 
             modelBuilder.Entity("StudiePlannerBlazor.Shared.Models.CalenderModel", b =>
                 {
-                    b.HasOne("Microsoft.AspNet.Identity.EntityFramework.IdentityUser", "User")
+                    b.HasOne("StudiePlannerBlazor.Shared.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });
@@ -621,7 +501,7 @@ namespace StudiePlannerBlazor.Server.Migrations
 
                     b.HasOne("StudiePlannerBlazor.Shared.Models.CalenderModel", null)
                         .WithMany("Tasks")
-                        .HasForeignKey("CalenderModelId");
+                        .HasForeignKey("CalenderModelCalenderId");
                 });
 #pragma warning restore 612, 618
         }

@@ -26,7 +26,7 @@ namespace StudiePlannerBlazor.Server.Repositories
 
         public CalenderModel Delete(int id)
         {
-            var foundModel = _applicationDbContext.Calenders.FirstOrDefault(a => a.Id == id);
+            var foundModel = _applicationDbContext.Calenders.FirstOrDefault(a => a.CalenderId == id);
             if (foundModel == null) return null;
 
             _applicationDbContext.Calenders.Remove(foundModel);
@@ -37,7 +37,7 @@ namespace StudiePlannerBlazor.Server.Repositories
 
         public CalenderModel Update(CalenderModel model)
         {
-            var foundModel = _applicationDbContext.Calenders.FirstOrDefault(a => a.Id == model.Id);
+            var foundModel = _applicationDbContext.Calenders.FirstOrDefault(a => a.CalenderId == model.CalenderId);
             foundModel = model;
             _applicationDbContext.SaveChanges();
             return foundModel;
@@ -50,7 +50,7 @@ namespace StudiePlannerBlazor.Server.Repositories
 
         public CalenderModel GetById(int id)
         {
-            return _applicationDbContext.Calenders.FirstOrDefault(a => a.Id == id);
+            return _applicationDbContext.Calenders.FirstOrDefault(a => a.CalenderId == id);
         }
     }
 }

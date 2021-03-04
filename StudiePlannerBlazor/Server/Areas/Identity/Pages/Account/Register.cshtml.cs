@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using StudiePlannerBlazor.Server.Models;
+using StudiePlannerBlazor.Shared.Models;
 
 namespace StudiePlannerBlazor.Server.Areas.Identity.Pages.Account
 {
