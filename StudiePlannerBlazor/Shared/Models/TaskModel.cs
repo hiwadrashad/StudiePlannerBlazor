@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace StudiePlannerBlazor.Shared.Models
@@ -12,6 +14,7 @@ namespace StudiePlannerBlazor.Shared.Models
     }
     public class TaskModel
     {
+        [Key]
         public int Id { get; set; }
         public string Name { get; set; }
         public DateTime StartDate { get; set; }
@@ -20,6 +23,5 @@ namespace StudiePlannerBlazor.Shared.Models
         public string Notes { get; set; }
         public AppointmentModel Appointment { get; set; }
         public IEnumerable<DocumentModel> Documents { get; set; }
-
     }
 }
