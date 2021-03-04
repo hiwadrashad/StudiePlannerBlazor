@@ -28,15 +28,25 @@ else
                     <td>@task.StartDate.ToShortDateString()</td>
                     <td>@task.EndDate.ToShortDateString()</td>
                     <td>@task.Status</td>
+                    <td>
+                        <a @onclick="@EditTask" class="btn btn-primary table-btn">
+                            Edit
+                        </a>
+                        <StudiePlannerBlazor.Client.Components.EditComponent @ref="EditComponent"></StudiePlannerBlazor.Client.Components.EditComponent>
+                    </td>
                 </tr>
             }
         </tbody>
     </table>
 }
 
-<button @onclick="@AddTask" class="btn btn-dark teble-btn quick-add-btn">&nbsp;&nbsp;+&nbsp;&nbsp;</button>
 
-<StudiePlannerBlazor.Client.Components.AddComponent @ref="_AddComponent"></StudiePlannerBlazor.Client.Components.AddComponent>
+
+<button @onclick="@AddTask" class="btn btn-dark table-btn quick-add-btn">&nbsp;&nbsp;+&nbsp;&nbsp;</button>
+
+<StudiePlannerBlazor.Client.Components.AddComponent @ref="AddComponent"></StudiePlannerBlazor.Client.Components.AddComponent>
+
+
 
 @*@if (taskstartednotification.ShowDialog == true)
     {
