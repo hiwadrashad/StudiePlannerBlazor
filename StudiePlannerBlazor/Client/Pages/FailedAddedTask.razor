@@ -1,4 +1,4 @@
-﻿@page "/succesfullydeletedtask"
+﻿@page "/failedaddedtask"
 @using Microsoft.AspNetCore.Components;
 @using System;
 @using System.Collections.Generic;
@@ -30,17 +30,15 @@
         transform: translate(-50%, -80%);
         color: gray;
     }
-
     .removelink {
-        display: none;
+    display:none;
     }
-
     body {
         overflow-x: hidden !important;
     }
 </style>
-<img src="/Images/success-icon.png" />
-<span>Succesfully deleted task </span>
+<img src="/Images/failed-icon.png" />
+<span>Failed adding task </span>
 <a @onclick="GoBack">Go back</a>
 @code {
     [Inject]

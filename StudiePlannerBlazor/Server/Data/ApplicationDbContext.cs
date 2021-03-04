@@ -37,18 +37,18 @@ namespace StudiePlannerBlazor.Server.Data
             {
                 Id = 3,
 
-                Tasks = new List<TaskModel> { new TaskModel {
-                Id = 4,
-                Name = "Work order for February",
-                StartDate = DateTime.ParseExact("01/02/2021", "dd/MM/yyyy", null),
-                EndDate = DateTime.ParseExact("01/03/2021", "dd/MM/yyyy", null),
-                Status = Shared.Models.TaskStatus.Done },
-               new TaskModel {
-                Id = 5,
-                Name = "Work order for March",
-                StartDate = DateTime.ParseExact("01/03/2021", "dd/MM/yyyy", null),
-                EndDate = DateTime.ParseExact("01/04/2021", "dd/MM/yyyy", null),
-                Status = Shared.Models.TaskStatus.Busy}  },
+               // Tasks = new List<TaskModel> { new TaskModel {
+               // Id = 4,
+               // Name = "Work order for February",
+               // StartDate = DateTime.ParseExact("01/02/2021", "dd/MM/yyyy", null),
+               // EndDate = DateTime.ParseExact("01/03/2021", "dd/MM/yyyy", null),
+               // Status = Shared.Models.TaskStatus.Done },
+               //new TaskModel {
+               // Id = 5,
+               // Name = "Work order for March",
+               // StartDate = DateTime.ParseExact("01/03/2021", "dd/MM/yyyy", null),
+               // EndDate = DateTime.ParseExact("01/04/2021", "dd/MM/yyyy", null),
+               // Status = Shared.Models.TaskStatus.Busy}  },
                 //User = new IdentityUser { Id = Guid.NewGuid().ToString(), Email = "test@hotmail.com", UserName = "test@hotmail.com" }
             }); ;
             builder.Entity<TaskModel>().HasData(new TaskModel

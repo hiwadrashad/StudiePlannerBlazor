@@ -1,4 +1,4 @@
-﻿@page "/succesfullydeletedtask"
+﻿@page "/failedeletedtask"
 @using Microsoft.AspNetCore.Components;
 @using System;
 @using System.Collections.Generic;
@@ -39,8 +39,8 @@
         overflow-x: hidden !important;
     }
 </style>
-<img src="/Images/success-icon.png" />
-<span>Succesfully deleted task </span>
+<img src="/Images/failed-icon.png" />
+<span>Failed deleting task </span>
 <a @onclick="GoBack">Go back</a>
 @code {
     [Inject]

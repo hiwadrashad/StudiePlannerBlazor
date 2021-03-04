@@ -7,7 +7,7 @@
 @using System.Collections.Generic;
 @using System.Linq;
 @using System.Threading.Tasks;
-<EditForm Model="model" OnValidSubmit="DeletingTask">
+<EditForm Model="model" OnInvalidSubmit="RedirectError" OnValidSubmit="DeletingTask">
 
     <button type="submit" class="btn btn-primary">Are you sure you want to remove this task?</button>
 </EditForm>
@@ -48,5 +48,10 @@
         //<summary>
 
         NavManager.NavigateTo("/succesfullydeletedtask");
+    }
+
+    public void RedirectError()
+    {
+        NavManager.NavigateTo("/faileddeletedtask");
     }
 }

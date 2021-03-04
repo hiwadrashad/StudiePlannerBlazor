@@ -12,7 +12,7 @@
 
 <section class="add">
     <h1 class="page-title">Add task</h1>
-    <EditForm Model="model" OnValidSubmit="EditingTask">
+    <EditForm Model="model"OnInvalidSubmit="RedirectError" OnValidSubmit="EditingTask">
         <div class="form-group row">
             <label class="col-sm-3">Name </label>
             <InputText id="lastName" class="form-control col-sm-8" @bind-Value="@model.Name"></InputText>
@@ -104,5 +104,10 @@
         //<summary>
 
         NavManager.NavigateTo("/succesfullyeditedtask");
+    }
+
+    public void RedirectError()
+    {
+        NavManager.NavigateTo("/failededitedtask");
     }
 }

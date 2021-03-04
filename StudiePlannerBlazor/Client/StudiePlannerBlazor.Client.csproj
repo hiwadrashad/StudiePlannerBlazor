@@ -20,8 +20,4 @@
     <ProjectReference Include="..\Shared\StudiePlannerBlazor.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\Images\" />
-  </ItemGroup>
-
 </Project>

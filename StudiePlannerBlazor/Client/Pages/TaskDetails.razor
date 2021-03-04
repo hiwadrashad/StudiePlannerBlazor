@@ -1,4 +1,4 @@
-﻿@*@page "/taskdetails"
+﻿@page "/taskdetails"
 @page "/taskdetails/{id}"
 
 @using Microsoft.AspNetCore.Components;
@@ -19,109 +19,51 @@
         <div class="col-10 row">
             <div class="col-xs-12 col-sm-8">
                 <div class="form-group row">
-                    <label class="col-sm-4 col-form-label">Employee ID</label>
+                    <label class="col-sm-4 col-form-label">Name</label>
                     <div class="col-sm-8">
-                        <label type="text" class="form-control-plaintext">@Employee.EmployeeId.ToString(leadingFormat)</label>
+                        <label type="text" class="form-control-plaintext">@model.Name</label>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-4 col-form-label">First name</label>
+                    <label class="col-sm-4 col-form-label">Start Date</label>
                     <div class="col-sm-8">
-                        <label type="text" readonly class="form-control-plaintext">@Employee.FirstName</label>
+                        <label type="text" readonly class="form-control-plaintext">@model.EndDate</label>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-4 col-form-label">Last name</label>
+                    <label class="col-sm-4 col-form-label">Status</label>
                     <div class="col-sm-8">
-                        <label type="text" readonly class="form-control-plaintext">@Employee.LastName</label>
+                        <label type="text" readonly class="form-control-plaintext">@model.Status</label>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-4 col-form-label">Birthdate</label>
+                    <label class="col-sm-4 col-form-label">Notes</label>
                     <div class="col-sm-8">
-                        <label type="text" readonly class="form-control-plaintext">@Employee.BirthDate.ToShortDateString()</label>
+                        <label type="text" readonly class="form-control-plaintext">@model.Notes</label>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Telephone number</label>
+                    <div class="col-sm-8">
+                        <label type="text" readonly class="form-control-plaintext">@model.Appointment.TelephoneNumber</label>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label class="col-sm-4 col-form-label">Email</label>
                     <div class="col-sm-8">
-                        <label type="text" readonly class="form-control-plaintext">@Employee.Email</label>
+                        <label type="text" readonly class="form-control-plaintext">@model.Appointment.Email</label>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-4 col-form-label">Street</label>
+                    <label class="col-sm-4 col-form-label">Personal contact</label>
                     <div class="col-sm-8">
-                        <label type="text" readonly class="form-control-plaintext">@Employee.Street</label>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label class="col-sm-4 col-form-label">Zip</label>
-                    <div class="col-sm-8">
-                        <label type="text" readonly class="form-control-plaintext">@Employee.Zip</label>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label class="col-sm-4 col-form-label">City</label>
-                    <div class="col-sm-8">
-                        <label type="text" readonly class="form-control-plaintext">@Employee.City</label>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label class="col-sm-4 col-form-label">Phone number</label>
-                    <div class="col-sm-8">
-                        <label type="text" readonly class="form-control-plaintext">@Employee.PhoneNumber</label>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label class="col-sm-4 col-form-label">Gender</label>
-                    <div class="col-sm-8">
-                        <label type="text" readonly class="form-control-plaintext">@Employee.Gender</label>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label class="col-sm-4 col-form-label">Smoker</label>
-                    <div class="col-sm-8">
-
-                        @if (Employee.Smoker)
-                        {
-                            <label type="text" readonly class="form-control-plaintext">Yes</label>
-                        }
-                        else
-                        {
-                            <label type="text" readonly class="form-control-plaintext">No</label>
-
-                        }
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label class="col-sm-4 col-form-label">Job category</label>
-                    <div class="col-sm-8">
-                        <label type="text" readonly class="form-control-plaintext">@JobCategory</label>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label class="col-sm-4 col-form-label">Joined us</label>
-                    <div class="col-sm-8">
-                        <label type="text" readonly class="form-control-plaintext">@Employee.JoinedDate?.ToShortDateString()</label>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label class="col-sm-4 col-form-label">Left us</label>
-                    <div class="col-sm-8">
-                        <label type="text" readonly class="form-control-plaintext">@Employee.ExitDate?.ToShortDateString()</label>
+                        <label type="text" readonly class="form-control-plaintext">@model.Appointment.PersonalContact</label>
                     </div>
                 </div>
             </div>
@@ -154,17 +96,4 @@
         //model = currentaccount.Tasks.Where(a => a.Id == id).FirstOrDefault();
         //<summary>
     }
-    public async void GoBack()
-    {
-        await TaskDataService.Delete(model.Id);
-
-        //<summary> apply list of logged in identity instead of all stored tasks / get identity running first
-        //var allaccounts = await CalenderDataService.GetAll();
-        //var currentaccount = allaccounts.Where(a => a.User.Email == StaticResources.CurrentIdentityUser.identityUser.Email).FirstOrDefault();
-        //currentaccount.Tasks.Remove(model);
-        //await CalenderDataService.Update(currentaccount);
-        //<summary>
-
-        NavManager.NavigateTo("/succesfullydeletedtask");
-    }
-}*@
+}
