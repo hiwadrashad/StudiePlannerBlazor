@@ -39,6 +39,7 @@ namespace StudiePlannerBlazor.Client
             {
                 client.BaseAddress = uri;
             });
+   
 
             builder.Services.AddApiAuthorization();
 

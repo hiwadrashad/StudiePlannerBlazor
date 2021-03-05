@@ -10,7 +10,7 @@
 @using System.Threading.Tasks;
 
 <section class="add">
-    <h1 class="page-title">Add task</h1>
+    <h1 class="page-title">Edit task</h1>
     <EditForm Model="model"OnInvalidSubmit="RedirectError" OnValidSubmit="EditingTask">
         <div class="form-group row">
             <label class="col-sm-3">Name </label>
@@ -78,10 +78,10 @@
     public TaskModel model { get; set; } = new TaskModel { Appointment = new AppointmentModel { } };
 
     [Parameter]
-    public int id { get; set; }
+    public string id { get; set; }
     protected override async Task OnInitializedAsync()
     {
-        model = await TaskDataService.GetById(id);
+        model = await TaskDataService.GetById(Int32.Parse(id));
 
         //<summary> apply list of logged in identity instead of all stored tasks / get identity running first
         //var allacounts = await CalenderDataService.GetAll();

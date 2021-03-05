@@ -88,14 +88,14 @@
     public IDataService<CalenderModel> CalenderDataService { get; set; }
     [Inject]
     public NavigationManager NavManager { get; set; }
-    public TaskModel model { get; set; } = new TaskModel { Appointment = new AppointmentModel { } };
+    public TaskModel model { get; set; }
 
     [Parameter]
-    public int Id { get; set; }
+    public string Id { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        model = await TaskDataService.GetById(Id);
+        model = await TaskDataService.GetById(Int32.Parse(Id));
 
         //<summary> apply list of logged in identity instead of all stored tasks / get identity running first
         //var allacounts = await CalenderDataService.GetAll();
