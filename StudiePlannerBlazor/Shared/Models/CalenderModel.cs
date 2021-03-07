@@ -13,8 +13,8 @@ namespace StudiePlannerBlazor.Shared.Models
         //[ForeignKey("Task")]
         //[NotMapped]
         //public List<int> TaskIds { get; set; }
-        //[ForeignKey("User")]
-        //public string UserId { get; set; }
+        [ForeignKey("User")]
+        public string UserId { get; set; }
         public List<TaskModel> Tasks { get; set; }
 
         public ApplicationUser User { get; set; }

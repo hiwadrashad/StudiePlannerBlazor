@@ -47,7 +47,7 @@ namespace StudiePlannerBlazor.Server.Data
             builder.Entity<CalenderModel>().HasData(new CalenderModel
             {
                 CalenderId = 1,
-                
+
                 //UserId = iditem
 
                 //Tasks = new List<TaskModel>()
@@ -71,8 +71,8 @@ namespace StudiePlannerBlazor.Server.Data
                 //},
 
                 //User = appuser
-
-                //User = new IdentityUser { Id = Guid.NewGuid().ToString(), Email = "test@hotmail.com", UserName = "test@hotmail.com" }
+                //UserId = iditem
+                //User = new ApplicationUser { Id = Guid.NewGuid().ToString(), Email = "test@hotmail.com", UserName = "test@hotmail.com" }
 
             }) ;
             builder.Entity<TaskModel>().HasData(new TaskModel
