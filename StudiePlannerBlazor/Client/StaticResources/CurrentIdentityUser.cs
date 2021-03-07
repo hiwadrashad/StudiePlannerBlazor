@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using StudiePlannerBlazor.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace StudiePlannerBlazor.Client.StaticResources
 {
     public static class CurrentIdentityUser
     {
-        public static IdentityUser identityUser { get; set; } = new IdentityUser { Email = "test@hotmail.com", UserName = "test@hotmail.com"  };
+        public static ApplicationUser appuser { get; set; } = new ApplicationUser { Email = "test@hotmail.com", UserName = "test@hotmail.com"  };
 
     }
 }

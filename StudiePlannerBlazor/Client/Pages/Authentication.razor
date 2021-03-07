@@ -1,6 +1,7 @@
 @page "/authentication/{action}"
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 <RemoteAuthenticatorView Action="@Action" />
+<link href="/css/Background.css" rel="stylesheet" />
 
 @code{
     [Parameter] public string Action { get; set; }

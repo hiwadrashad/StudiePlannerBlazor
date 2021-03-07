@@ -8,10 +8,11 @@
 @using System.Collections.Generic;
 @using System.Linq;
 @using System.Threading.Tasks;
+<link href="/css/Background.css" rel="stylesheet" />
 
 <section class="add">
     <h1 class="page-title">Edit task</h1>
-    <EditForm Model="model"OnInvalidSubmit="RedirectError" OnValidSubmit="EditingTask">
+    <EditForm Model="model" OnInvalidSubmit="RedirectError" OnValidSubmit="EditingTask">
         <div class="form-group row">
             <label class="col-sm-3">Name </label>
             <InputText id="lastName" class="form-control col-sm-8" @bind-Value="@model.Name"></InputText>
@@ -87,7 +88,7 @@
         //var allacounts = await CalenderDataService.GetAll();
         //var currentaccount = allacounts.Where(a => a.User.Email == StaticResources.CurrentIdentityUser.identityUser.Email).FirstOrDefault();
         //model = currentaccount.Tasks.Where(a => a.Id == id).FirstOrDefault();
-        //<summary>    
+        //<summary>
     }
 
     public async void EditingTask()

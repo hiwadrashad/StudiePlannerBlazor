@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace StudiePlannerBlazor.Shared.Models
@@ -21,6 +22,8 @@ namespace StudiePlannerBlazor.Shared.Models
         public DateTime EndDate { get; set; }
         public TaskStatus Status { get; set; }
         public string Notes { get; set; }
+        //[ForeignKey("Appointment")]
+        //public int AppointmentId { get; set; }
         public AppointmentModel Appointment { get; set; }
         public IEnumerable<DocumentModel> Documents { get; set; }
     }

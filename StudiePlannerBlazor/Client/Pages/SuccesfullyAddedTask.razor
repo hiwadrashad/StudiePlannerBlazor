@@ -1,53 +1,55 @@
 ﻿@page "/succesfullyaddedtask"
-    @using Microsoft.AspNetCore.Components;
-    @using System;
-    @using System.Collections.Generic;
-    @using System.Linq;
-    @using System.Threading.Tasks;
-    <style>
-        img {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 300px;
-        }
+@using Microsoft.AspNetCore.Components;
+@using System;
+@using System.Collections.Generic;
+@using System.Linq;
+@using System.Threading.Tasks;
+<link href="/css/Background.css" rel="stylesheet" />
 
-        span {
-            display: inline-block;
-            position: fixed;
-            top: 70%;
-            left: 50%;
-            transform: translate(-50%, -70%);
-            color: gray;
-        }
-
-        a {
-            display: inline-block;
-            position: fixed;
-            top: 80%;
-            left: 50%;
-            transform: translate(-50%, -80%);
-            color: gray;
-        }
-
-        .removelink {
-            display: none;
-        }
-
-        body {
-            overflow-x: hidden !important;
-        }
-    </style>
-    <img src="/Images/success-icon.png" />
-    <span>Succesfully added task </span>
-    <a @onclick="GoBack">Go back</a>
-    @code {
-        [Inject]
-        NavigationManager NavManager { get; set; }
-
-        public void GoBack()
-        {
-            NavManager.NavigateTo("/");
-        }
+<style>
+    img {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 300px;
     }
+
+    span {
+        display: inline-block;
+        position: fixed;
+        top: 70%;
+        left: 50%;
+        transform: translate(-50%, -70%);
+        color: gray;
+    }
+
+    a {
+        display: inline-block;
+        position: fixed;
+        top: 80%;
+        left: 50%;
+        transform: translate(-50%, -80%);
+        color: gray;
+    }
+
+    .removelink {
+        display: none;
+    }
+
+    body {
+        overflow-x: hidden !important;
+    }
+</style>
+<img src="/Images/success-icon.png" />
+<span>Succesfully added task </span>
+<a @onclick="GoBack">Go back</a>
+@code {
+    [Inject]
+    NavigationManager NavManager { get; set; }
+
+    public void GoBack()
+    {
+        NavManager.NavigateTo("/");
+    }
+}

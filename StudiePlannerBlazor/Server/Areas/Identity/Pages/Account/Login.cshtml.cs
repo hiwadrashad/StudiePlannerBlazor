@@ -75,7 +75,7 @@ namespace StudiePlannerBlazor.Server.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
-
+            
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
@@ -84,6 +84,7 @@ namespace StudiePlannerBlazor.Server.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    Client.StaticResources.CurrentIdentityUser.appuser = await _userManager.FindByEmailAsync(Input.Email);
                     return LocalRedirect(returnUrl);
                     //Client.StaticResources.CurrentIdentityUser.identityUser = await _userManager.FindByNameAsync(Input.Email) as IdentityUser;
                     
