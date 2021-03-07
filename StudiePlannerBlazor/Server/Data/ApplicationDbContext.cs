@@ -44,6 +44,24 @@ namespace StudiePlannerBlazor.Server.Data
             //    Email = "test@hotmail.com",
             //};
 
+            builder.Entity<TaskModel>().HasData(new TaskModel
+            {
+                Id = 1,
+                CalenderId = 1,
+                Name = "Work order for February",
+                StartDate = DateTime.ParseExact("01/02/2021", "dd/MM/yyyy", null),
+                EndDate = DateTime.ParseExact("01/03/2021", "dd/MM/yyyy", null),
+                Status = Shared.Models.TaskStatus.Done
+            });
+            builder.Entity<TaskModel>().HasData(new TaskModel
+            {
+                Id = 2,
+                CalenderId = 1,
+                Name = "Work order for March",
+                StartDate = DateTime.ParseExact("01/03/2021", "dd/MM/yyyy", null),
+                EndDate = DateTime.ParseExact("01/04/2021", "dd/MM/yyyy", null),
+                Status = Shared.Models.TaskStatus.Busy
+            });
             builder.Entity<CalenderModel>().HasData(new CalenderModel
             {
                 CalenderId = 1,
@@ -71,27 +89,10 @@ namespace StudiePlannerBlazor.Server.Data
                 //},
 
                 //User = appuser
-                //UserId = iditem
+                UserId = iditem,
+                //TaskId = new List<int> { 1 },
                 //User = new ApplicationUser { Id = Guid.NewGuid().ToString(), Email = "test@hotmail.com", UserName = "test@hotmail.com" }
 
-            }) ;
-            builder.Entity<TaskModel>().HasData(new TaskModel
-            {
-                Id = 1,
-                CalenderId = 1,
-                Name = "Work order for February",
-                StartDate = DateTime.ParseExact("01/02/2021", "dd/MM/yyyy", null),
-                EndDate = DateTime.ParseExact("01/03/2021", "dd/MM/yyyy", null),
-                Status = Shared.Models.TaskStatus.Done
-            });
-            builder.Entity<TaskModel>().HasData(new TaskModel
-            {
-                Id = 2,
-                CalenderId = 1,
-                Name = "Work order for March",
-                StartDate = DateTime.ParseExact("01/03/2021", "dd/MM/yyyy", null),
-                EndDate = DateTime.ParseExact("01/04/2021", "dd/MM/yyyy", null),
-                Status = Shared.Models.TaskStatus.Busy
             });
         }
     }

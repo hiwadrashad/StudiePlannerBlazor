@@ -10,13 +10,14 @@ namespace StudiePlannerBlazor.Shared.Models
     {
         [Key]
         public int CalenderId { get; set; }
-        //[ForeignKey("Task")]
+#nullable enable
+        public string? UserId { get; set; }
         //[NotMapped]
-        //public List<int> TaskIds { get; set; }
-        [ForeignKey("User")]
-        public string UserId { get; set; }
-        public List<TaskModel> Tasks { get; set; }
-
+        //public List<int>? TaskId { get; set; }
+#nullable disable
+        //[ForeignKey("TaskId")]
+        //public List<TaskModel> Tasks { get; set; }
+        [ForeignKey("UserId")]
         public ApplicationUser User { get; set; }
     }
 }
