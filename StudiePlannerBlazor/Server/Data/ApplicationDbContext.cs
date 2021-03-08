@@ -38,12 +38,12 @@ namespace StudiePlannerBlazor.Server.Data
             //    UserName = "test1@hotmail.com"
             //});
 
-            var user = new ApplicationUser
-            {
-                Id = Guid.NewGuid().ToString(),
-                Email = "test1@hotmail.com",
-                UserName = "test1@hotmail.com"
-            };
+            //var user = new ApplicationUser
+            //{
+            //    Id = Guid.NewGuid().ToString(),
+            //    Email = "test1@hotmail.com",
+            //    UserName = "test1@hotmail.com"
+            //};
 
             builder.Entity<CalenderModel>().HasData(new CalenderModel
             {
@@ -69,7 +69,7 @@ namespace StudiePlannerBlazor.Server.Data
                 //    }
                 //},
 
-                User = user
+                //User = user
 
                 //User = Users.FirstOrDefault(l => l.UserName == "test1@hotmail.com") as ApplicationUser
 
