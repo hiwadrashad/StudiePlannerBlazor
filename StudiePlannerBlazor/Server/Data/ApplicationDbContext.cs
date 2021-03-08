@@ -31,17 +31,24 @@ namespace StudiePlannerBlazor.Server.Data
             //builder.Entity<IdentityUserRole>().HasKey(m => m.UserId);
             base.OnModelCreating(builder);
 
-            //builder.Entity<IdentityUser>().HasData(new IdentityUser
+            //builder.Entity<ApplicationUser>().HasData(new ApplicationUser
             //{
             //    Id = Guid.NewGuid().ToString(),
-            //    Email = "test@hotmail.com",
-            //    UserName = "test@hotmail.com"
+            //    Email = "test1@hotmail.com",
+            //    UserName = "test1@hotmail.com"
             //});
+
+            var user = new ApplicationUser
+            {
+                Id = Guid.NewGuid().ToString(),
+                Email = "test1@hotmail.com",
+                UserName = "test1@hotmail.com"
+            };
 
             builder.Entity<CalenderModel>().HasData(new CalenderModel
             {
                 CalenderId = 1,
-                
+
                 //Tasks = new List<TaskModel>()
                 //{
                 //    new TaskModel
@@ -62,7 +69,9 @@ namespace StudiePlannerBlazor.Server.Data
                 //    }
                 //},
 
-                //User = Users.FirstOrDefault(l => l.UserName == "test@hotmail.com")
+                User = user
+
+                //User = Users.FirstOrDefault(l => l.UserName == "test1@hotmail.com") as ApplicationUser
 
                 //User = new IdentityUser { Id = Guid.NewGuid().ToString(), Email = "test@hotmail.com", UserName = "test@hotmail.com" }
 

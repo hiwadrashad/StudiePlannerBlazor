@@ -233,8 +233,7 @@ namespace StudiePlannerBlazor.Server.Migrations
                     EndDate = table.Column<DateTime>(nullable: false),
                     Status = table.Column<int>(nullable: false),
                     Notes = table.Column<string>(nullable: true),
-                    AppointmentId = table.Column<int>(nullable: true),
-                    CalenderModelCalenderId = table.Column<int>(nullable: true)
+                    AppointmentId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -246,11 +245,11 @@ namespace StudiePlannerBlazor.Server.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Tasks_Calenders_CalenderModelCalenderId",
-                        column: x => x.CalenderModelCalenderId,
+                        name: "FK_Tasks_Calenders_CalenderId",
+                        column: x => x.CalenderId,
                         principalTable: "Calenders",
                         principalColumn: "CalenderId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -280,13 +279,13 @@ namespace StudiePlannerBlazor.Server.Migrations
 
             migrationBuilder.InsertData(
                 table: "Tasks",
-                columns: new[] { "Id", "AppointmentId", "CalenderId", "CalenderModelCalenderId", "EndDate", "Name", "Notes", "StartDate", "Status" },
-                values: new object[] { 1, null, 1, null, new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Work order for February", null, new DateTime(2021, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 });
+                columns: new[] { "Id", "AppointmentId", "CalenderId", "EndDate", "Name", "Notes", "StartDate", "Status" },
+                values: new object[] { 1, null, 1, new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Work order for February", null, new DateTime(2021, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 });
 
             migrationBuilder.InsertData(
                 table: "Tasks",
-                columns: new[] { "Id", "AppointmentId", "CalenderId", "CalenderModelCalenderId", "EndDate", "Name", "Notes", "StartDate", "Status" },
-                values: new object[] { 2, null, 1, null, new DateTime(2021, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Work order for March", null, new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 });
+                columns: new[] { "Id", "AppointmentId", "CalenderId", "EndDate", "Name", "Notes", "StartDate", "Status" },
+                values: new object[] { 2, null, 1, new DateTime(2021, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Work order for March", null, new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -364,9 +363,9 @@ namespace StudiePlannerBlazor.Server.Migrations
                 column: "AppointmentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tasks_CalenderModelCalenderId",
+                name: "IX_Tasks_CalenderId",
                 table: "Tasks",
-                column: "CalenderModelCalenderId");
+                column: "CalenderId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

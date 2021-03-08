@@ -10,7 +10,7 @@ using StudiePlannerBlazor.Server.Data;
 namespace StudiePlannerBlazor.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210304124219_SeedData")]
+    [Migration("20210308095004_SeedData")]
     partial class SeedData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -383,9 +383,6 @@ namespace StudiePlannerBlazor.Server.Migrations
                     b.Property<int>("CalenderId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CalenderModelCalenderId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
@@ -405,7 +402,7 @@ namespace StudiePlannerBlazor.Server.Migrations
 
                     b.HasIndex("AppointmentId");
 
-                    b.HasIndex("CalenderModelCalenderId");
+                    b.HasIndex("CalenderId");
 
                     b.ToTable("Tasks");
 
@@ -501,9 +498,11 @@ namespace StudiePlannerBlazor.Server.Migrations
                         .WithMany()
                         .HasForeignKey("AppointmentId");
 
-                    b.HasOne("StudiePlannerBlazor.Shared.Models.CalenderModel", null)
+                    b.HasOne("StudiePlannerBlazor.Shared.Models.CalenderModel", "CalenderModel")
                         .WithMany("Tasks")
-                        .HasForeignKey("CalenderModelCalenderId");
+                        .HasForeignKey("CalenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

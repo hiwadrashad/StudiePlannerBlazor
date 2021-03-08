@@ -28,30 +28,30 @@ else
         <tbody>
             @foreach (var task in Tasks)
             {
-            <tr>
-                <td>@task.Id</td>
-                <td>@task.Name</td>
-                <td>@task.StartDate.ToShortDateString()</td>
-                <td>@task.EndDate.ToShortDateString()</td>
-                <td>@task.Status</td>
-                <td>
-                </td>
-                <td>
-                    <a href="@($"deletetask/{task.Id}")" class="btn btn-primary table-btn">
-                        delete task
-                    </a>
-                </td>
-                <td>
-                    <a href="@($"edittask/{task.Id}")" class="btn btn-primary table-btn">
-                        add task
-                    </a>
-                </td>
-                <td>
-                    <a href="@($"taskdetails/{task.Id}")" class="btn btn-primary table-btn">
-                        see details
-                    </a>
-                </td>
-            </tr>
+                <tr>
+                    <td>@task.Id</td>
+                    <td>@task.Name</td>
+                    <td>@task.StartDate.ToShortDateString()</td>
+                    <td>@task.EndDate.ToShortDateString()</td>
+                    <td>@task.Status</td>
+                    <td>
+                    </td>
+                    <td>
+                        <a href="@($"deletetask/{task.Id}")" class="btn btn-primary table-btn">
+                            delete task
+                        </a>
+                    </td>
+                    <td>
+                        <a href="@($"edittask/{task.Id}")" class="btn btn-primary table-btn">
+                            add task
+                        </a>
+                    </td>
+                    <td>
+                        <a href="@($"taskdetails/{task.Id}")" class="btn btn-primary table-btn">
+                            see details
+                        </a>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>

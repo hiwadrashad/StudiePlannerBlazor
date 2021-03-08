@@ -43,8 +43,14 @@ namespace StudiePlannerBlazor.Server.Repositories
             return foundModel;
         }
 
-        public List<CalenderModel> GetAll()
+        public List<CalenderModel> GetAll(/*CalenderModel model, TaskModel task*/)
         {
+            //List<CalenderModel> Tasks = _applicationDbContext.Tasks.ToList();
+            //if (model.CalenderId == task.CalenderId)
+            //{
+            //    Tasks.Add(task);
+            //}
+            //return Tasks.ToList();
             return _applicationDbContext.Calenders.ToList();
         }
 
