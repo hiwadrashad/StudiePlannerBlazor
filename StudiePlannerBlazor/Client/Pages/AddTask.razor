@@ -22,8 +22,18 @@
             <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => model.StartDate)" />
         </div>
         <div class="form-group row">
+            <label class="col-sm-3">Start time </label>
+            <input type="time" class="form-control col-sm-8" id="StartTime" @bind="model.StartDate" />
+            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => model.StartDate)" />
+        </div>
+        <div class="form-group row">
             <label class="col-sm-3"> End date</label>
             <InputDate class="form-control col-sm-8" @bind-Value="@model.EndDate"></InputDate>
+            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => model.EndDate)" />
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3">End time </label>
+            <input type="time" class="form-control col-sm-8" id="StartTime" @bind="model.EndDate" />
             <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => model.EndDate)" />
         </div>
         <div class="form-group row">

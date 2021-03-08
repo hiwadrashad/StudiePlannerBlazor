@@ -23,9 +23,11 @@ namespace StudiePlannerBlazor.Client.Pages
 
         protected override async Task OnInitializedAsync()
         {
+            Tasks = (await TaskDataService.GetAll()).ToList();
+
             //time = new Timer();
             //time.Elapsed += new System.Timers.ElapsedEventHandler(Timerexecutioncode);
-            //time.Interval = 60000;
+            //time.Interval = 1000;
             //time.Start();
 
             //<summary> apply list of logged in identity instead of all stored tasks / get identity running first
@@ -33,8 +35,6 @@ namespace StudiePlannerBlazor.Client.Pages
             //var currentuser = users.Where(a => a.User.Email == StaticResources.CurrentIdentityUser.identityUser.Email).FirstOrDefault();
             //Tasks = currentuser.Tasks;
             //<summary>
-            Tasks = (await TaskDataService.GetAll()).ToList();
-            //Taskstartednotification.ShowDialog = true;
         }
 
         protected void ShowMessageStart()
@@ -60,7 +60,7 @@ namespace StudiePlannerBlazor.Client.Pages
             Tasksendednotification.ShowDialog = false;
             StateHasChanged();
         }
-        private async void Timerexecutioncode(object sender, EventArgs e)
+        private async void Timerexecutioncode(object sender, ElapsedEventArgs e)
         {
             var items = await TaskDataService.GetAll();
             if (items.Where(a => a.StartDate == DateTime.Now).Any())
@@ -70,13 +70,13 @@ namespace StudiePlannerBlazor.Client.Pages
                 Taskstartednotification.TextToShow = texttoshow;
                 ShowMessageStart();
             }
-            if (Taskstartednotification.ShowDialog == false)
-            {
-                var itemtoshow = items.Where(a => a.EndDate == DateTime.Now).FirstOrDefault();
-                string texttoshow = itemtoshow.Name = " " + "has ended";
-                Tasksendednotification.TextToShow = texttoshow;
-                ShowMessageEnd();
-            }
+            //if (Taskstartednotification.ShowDialog == false && items.Where(a => a.EndDate == DateTime.Now).Any())
+            //{
+            //    var itemtoshow = items.Where(a => a.EndDate == DateTime.Now).FirstOrDefault();
+            //    string texttoshow = itemtoshow.Name = " " + "has ended";
+            //    Tasksendednotification.TextToShow = texttoshow;
+            //    ShowMessageEnd();
+            //}
         }
     }
 }

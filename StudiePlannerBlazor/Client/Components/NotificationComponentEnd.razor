@@ -12,7 +12,7 @@
                 <div class="form-group">
                     <label>@TextToShow </label>
                 </div>
-                @*<a class="btn btn-outline-primary" @onclick="@Close">Sluiten</a>*@
+                <a class="btn btn-outline-primary" @onclick="@Close">Close</a>
 
             </div>
         </div>
@@ -21,4 +21,10 @@
 @code {
     public string TextToShow { get; set; }
     public bool ShowDialog { get; set; }
+
+    public void Close()
+    {
+        ShowDialog = false;
+        StateHasChanged();
+    }
 }
