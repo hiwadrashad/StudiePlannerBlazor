@@ -31,10 +31,6 @@ namespace StudiePlannerBlazor.Client
             {
                 client.BaseAddress = uri;
             });
-            builder.Services.AddHttpClient<IDataService<CalenderModel>, CalenderDataService>(client =>
-            {
-                client.BaseAddress = uri;
-            });
             builder.Services.AddHttpClient<IDataService<AppointmentModel>, AppointmentDataService>(client =>
             {
                 client.BaseAddress = uri;

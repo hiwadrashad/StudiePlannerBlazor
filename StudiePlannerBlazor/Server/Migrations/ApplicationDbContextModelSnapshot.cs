@@ -303,14 +303,15 @@ namespace StudiePlannerBlazor.Server.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6d475721-6938-469a-a738-48f25eccf88f",
+                            Id = "SeedUser1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2f02e081-5f23-4cad-a025-0da5be8521d2",
+                            ConcurrencyStamp = "f69df5c6-32da-40c7-8144-57af57d0dc6d",
                             Email = "test1@hotmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
+                            PasswordHash = "AQAAAAEAACcQAAAAEHjsKXdmWBh2n4LMr60mo3b2zma6XZaCba6v+X60OzGPBYq3uPsddtQM1ruMNH1OCg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "41e26662-84f6-40ca-a5f4-4d2fccf4435a",
+                            SecurityStamp = "6b3629fb-01de-4683-93d7-40c201afa580",
                             TwoFactorEnabled = false,
                             UserName = "test1@hotmail.com"
                         });
@@ -338,28 +339,15 @@ namespace StudiePlannerBlazor.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Appointments");
-                });
-
-            modelBuilder.Entity("StudiePlannerBlazor.Shared.Models.CalenderModel", b =>
-                {
-                    b.Property<int>("CalenderId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("CalenderId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Calenders");
 
                     b.HasData(
                         new
                         {
-                            CalenderId = 1
+                            Id = 1,
+                            Date = new DateTime(2021, 3, 13, 14, 17, 25, 924, DateTimeKind.Local).AddTicks(9251),
+                            Email = "Appointment1@hotmail.com",
+                            PersonalContact = true,
+                            TelephoneNumber = "0123-456789"
                         });
                 });
 
@@ -390,10 +378,10 @@ namespace StudiePlannerBlazor.Server.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AppointmentId")
-                        .HasColumnType("int");
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("CalenderId")
+                    b.Property<int>("AppointmentId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("EndDate")
@@ -413,9 +401,9 @@ namespace StudiePlannerBlazor.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppointmentId");
+                    b.HasIndex("ApplicationUserId");
 
-                    b.HasIndex("CalenderId");
+                    b.HasIndex("AppointmentId");
 
                     b.ToTable("Tasks");
 
@@ -423,18 +411,22 @@ namespace StudiePlannerBlazor.Server.Migrations
                         new
                         {
                             Id = 1,
-                            CalenderId = 1,
+                            ApplicationUserId = "SeedUser1",
+                            AppointmentId = 1,
                             EndDate = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Work order for February",
+                            Notes = "geen aantekeningen",
                             StartDate = new DateTime(2021, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 2
                         },
                         new
                         {
                             Id = 2,
-                            CalenderId = 1,
+                            ApplicationUserId = "SeedUser1",
+                            AppointmentId = 1,
                             EndDate = new DateTime(2021, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Work order for March",
+                            Notes = "geen aantekeningen",
                             StartDate = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 1
                         });
@@ -491,13 +483,6 @@ namespace StudiePlannerBlazor.Server.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("StudiePlannerBlazor.Shared.Models.CalenderModel", b =>
-                {
-                    b.HasOne("StudiePlannerBlazor.Shared.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-                });
-
             modelBuilder.Entity("StudiePlannerBlazor.Shared.Models.DocumentModel", b =>
                 {
                     b.HasOne("StudiePlannerBlazor.Shared.Models.TaskModel", null)
@@ -507,13 +492,13 @@ namespace StudiePlannerBlazor.Server.Migrations
 
             modelBuilder.Entity("StudiePlannerBlazor.Shared.Models.TaskModel", b =>
                 {
+                    b.HasOne("StudiePlannerBlazor.Shared.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
+
                     b.HasOne("StudiePlannerBlazor.Shared.Models.AppointmentModel", "Appointment")
                         .WithMany()
-                        .HasForeignKey("AppointmentId");
-
-                    b.HasOne("StudiePlannerBlazor.Shared.Models.CalenderModel", "CalenderModel")
-                        .WithMany("Tasks")
-                        .HasForeignKey("CalenderId")
+                        .HasForeignKey("AppointmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

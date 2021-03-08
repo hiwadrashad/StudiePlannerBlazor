@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace StudiePlannerBlazor.Server.Migrations
 {
-    public partial class SeedData : Migration
+    public partial class SeedData2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -203,52 +203,33 @@ namespace StudiePlannerBlazor.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Calenders",
-                columns: table => new
-                {
-                    CalenderId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Calenders", x => x.CalenderId);
-                    table.ForeignKey(
-                        name: "FK_Calenders_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Tasks",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CalenderId = table.Column<int>(nullable: false),
+                    AppointmentId = table.Column<int>(nullable: false),
+                    ApplicationUserId = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     StartDate = table.Column<DateTime>(nullable: false),
                     EndDate = table.Column<DateTime>(nullable: false),
                     Status = table.Column<int>(nullable: false),
-                    Notes = table.Column<string>(nullable: true),
-                    AppointmentId = table.Column<int>(nullable: true)
+                    Notes = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tasks", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Tasks_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_Tasks_Appointments_AppointmentId",
                         column: x => x.AppointmentId,
                         principalTable: "Appointments",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Tasks_Calenders_CalenderId",
-                        column: x => x.CalenderId,
-                        principalTable: "Calenders",
-                        principalColumn: "CalenderId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -273,19 +254,24 @@ namespace StudiePlannerBlazor.Server.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Calenders",
-                columns: new[] { "CalenderId", "UserId" },
-                values: new object[] { 1, null });
+                table: "Appointments",
+                columns: new[] { "Id", "Date", "Email", "PersonalContact", "TelephoneNumber" },
+                values: new object[] { 1, new DateTime(2021, 3, 13, 13, 56, 41, 946, DateTimeKind.Local).AddTicks(7484), "Appointment1@hotmail.com", true, "0123-456789" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "SeedUser1", 0, "546b727a-610b-4566-8bfc-7ab452fa5d73", "test1@hotmail.com", false, false, null, null, null, null, null, false, "1dd81378-7601-4083-8ada-fe7dac5ee27f", false, "test1@hotmail.com" });
 
             migrationBuilder.InsertData(
                 table: "Tasks",
-                columns: new[] { "Id", "AppointmentId", "CalenderId", "EndDate", "Name", "Notes", "StartDate", "Status" },
-                values: new object[] { 1, null, 1, new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Work order for February", null, new DateTime(2021, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 });
+                columns: new[] { "Id", "ApplicationUserId", "AppointmentId", "EndDate", "Name", "Notes", "StartDate", "Status" },
+                values: new object[] { 1, "SeedUser1", 1, new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Work order for February", "geen aantekeningen", new DateTime(2021, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 });
 
             migrationBuilder.InsertData(
                 table: "Tasks",
-                columns: new[] { "Id", "AppointmentId", "CalenderId", "EndDate", "Name", "Notes", "StartDate", "Status" },
-                values: new object[] { 2, null, 1, new DateTime(2021, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Work order for March", null, new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 });
+                columns: new[] { "Id", "ApplicationUserId", "AppointmentId", "EndDate", "Name", "Notes", "StartDate", "Status" },
+                values: new object[] { 2, "SeedUser1", 1, new DateTime(2021, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Work order for March", "geen aantekeningen", new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -327,11 +313,6 @@ namespace StudiePlannerBlazor.Server.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Calenders_UserId",
-                table: "Calenders",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_DeviceCodes_DeviceCode",
                 table: "DeviceCodes",
                 column: "DeviceCode",
@@ -358,14 +339,14 @@ namespace StudiePlannerBlazor.Server.Migrations
                 columns: new[] { "SubjectId", "ClientId", "Type" });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Tasks_ApplicationUserId",
+                table: "Tasks",
+                column: "ApplicationUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Tasks_AppointmentId",
                 table: "Tasks",
                 column: "AppointmentId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tasks_CalenderId",
-                table: "Tasks",
-                column: "CalenderId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -401,13 +382,10 @@ namespace StudiePlannerBlazor.Server.Migrations
                 name: "Tasks");
 
             migrationBuilder.DropTable(
-                name: "Appointments");
-
-            migrationBuilder.DropTable(
-                name: "Calenders");
-
-            migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Appointments");
         }
     }
 }
