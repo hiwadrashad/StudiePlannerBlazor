@@ -256,12 +256,12 @@ namespace StudiePlannerBlazor.Server.Migrations
             migrationBuilder.InsertData(
                 table: "Appointments",
                 columns: new[] { "Id", "Date", "Email", "PersonalContact", "TelephoneNumber" },
-                values: new object[] { 1, new DateTime(2021, 3, 14, 10, 42, 23, 664, DateTimeKind.Local).AddTicks(5492), "Appointment1@hotmail.com", true, "0123-456789" });
+                values: new object[] { 1, new DateTime(2021, 3, 14, 14, 30, 48, 246, DateTimeKind.Local).AddTicks(2041), "Appointment1@hotmail.com", true, "0123-456789" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "SeedUser1", 0, "a80c7d2a-ecb6-47ec-a13c-d8c15bfd7ce3", "test1@hotmail.com", true, false, null, null, null, "TestPassword123!", null, false, "0085cf1f-0b34-4fc4-83cb-837b8b6649ea", false, "test1@hotmail.com" });
+                values: new object[] { "SeedUser1", 0, "57d75696-2fa1-4af3-8191-c21cdd2274b0", "test1@hotmail.com", true, false, null, null, null, "Passw0rd!", null, false, "23b44558-26fb-4522-9123-2f0bca49774d", false, "test1@hotmail.com" });
 
             migrationBuilder.InsertData(
                 table: "Tasks",

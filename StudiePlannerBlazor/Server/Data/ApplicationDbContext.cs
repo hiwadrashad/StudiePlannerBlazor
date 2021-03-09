@@ -14,15 +14,20 @@ namespace StudiePlannerBlazor.Server.Data
 {
     public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {
+        //private readonly UserManager<ApplicationUser> _userManager;
 
         public ApplicationDbContext(
             DbContextOptions options,
-            IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
+            IOptions<OperationalStoreOptions> operationalStoreOptions/*, UserManager<ApplicationUser> userManager*/) : base(options, operationalStoreOptions)
         {
+            //_userManager = userManager;
         }
 
         public DbSet<AppointmentModel> Appointments { get; set; }
         public DbSet<TaskModel> Tasks { get; set; }
+
+        
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -31,17 +36,36 @@ namespace StudiePlannerBlazor.Server.Data
 
             base.OnModelCreating(builder);
 
+
             var hasher = new PasswordHasher<ApplicationUser>();
+
+            //var user = new ApplicationUser
+            //{
+            //    Id = "SeedUser1",
+            //    Email = "test1@hotmail.com",
+            //    UserName = "test1@hotmail.com",
+            //    //PasswordHash = hasher.HashPassword(null, "Passw0rd!")
+            //    //PasswordHash = "Passw0rd!",
+            //    EmailConfirmed = true
+
+            //};
 
             builder.Entity<ApplicationUser>().HasData(new ApplicationUser
             {
                 Id = "SeedUser1",
                 Email = "test1@hotmail.com",
                 UserName = "test1@hotmail.com",
-                //PasswordHash = hasher.HashPassword(null, "Passw0rd!")
-                PasswordHash = "TestPassword123!",
+                PasswordHash = hasher.HashPassword(null, "Passw0rd!"),
+                //PasswordHash = "Passw0rd!",
                 EmailConfirmed = true
             });
+
+            //var result = await _userManager.CreateAsync(user, Input.Password);
+
+            //var password = new PasswordHasher<ApplicationUser>();
+            //var hashed = password.HashPassword(user, "Passw0rd!");
+            //user.PasswordHash = hashed;
+            //builder.Entity<ApplicationUser>().HasData(user);
 
             builder.Entity<AppointmentModel>().HasData(new AppointmentModel
             {
@@ -60,7 +84,7 @@ namespace StudiePlannerBlazor.Server.Data
                 Name = "Work order for February",
                 StartDate = DateTime.ParseExact("01/02/2021", "dd/MM/yyyy", null),
                 EndDate = DateTime.ParseExact("01/03/2021", "dd/MM/yyyy", null),
-                Status = Shared.Models.TaskStatus.Done, 
+                Status = Shared.Models.TaskStatus.Done,
                 Notes = "geen aantekeningen"
             });
             builder.Entity<TaskModel>().HasData(new TaskModel

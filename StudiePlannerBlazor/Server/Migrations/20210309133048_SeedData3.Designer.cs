@@ -10,7 +10,7 @@ using StudiePlannerBlazor.Server.Data;
 namespace StudiePlannerBlazor.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210309094223_SeedData3")]
+    [Migration("20210309133048_SeedData3")]
     partial class SeedData3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -307,13 +307,13 @@ namespace StudiePlannerBlazor.Server.Migrations
                         {
                             Id = "SeedUser1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a80c7d2a-ecb6-47ec-a13c-d8c15bfd7ce3",
+                            ConcurrencyStamp = "57d75696-2fa1-4af3-8191-c21cdd2274b0",
                             Email = "test1@hotmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            PasswordHash = "TestPassword123!",
+                            PasswordHash = "Passw0rd!",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0085cf1f-0b34-4fc4-83cb-837b8b6649ea",
+                            SecurityStamp = "23b44558-26fb-4522-9123-2f0bca49774d",
                             TwoFactorEnabled = false,
                             UserName = "test1@hotmail.com"
                         });
@@ -346,7 +346,7 @@ namespace StudiePlannerBlazor.Server.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2021, 3, 14, 10, 42, 23, 664, DateTimeKind.Local).AddTicks(5492),
+                            Date = new DateTime(2021, 3, 14, 14, 30, 48, 246, DateTimeKind.Local).AddTicks(2041),
                             Email = "Appointment1@hotmail.com",
                             PersonalContact = true,
                             TelephoneNumber = "0123-456789"
