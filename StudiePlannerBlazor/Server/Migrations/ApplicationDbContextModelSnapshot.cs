@@ -305,13 +305,13 @@ namespace StudiePlannerBlazor.Server.Migrations
                         {
                             Id = "SeedUser1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4bdc466b-4911-41d9-95f9-9bf3fb27411d",
+                            ConcurrencyStamp = "a80c7d2a-ecb6-47ec-a13c-d8c15bfd7ce3",
                             Email = "test1@hotmail.com",
-                            EmailConfirmed = false,
+                            EmailConfirmed = true,
                             LockoutEnabled = false,
                             PasswordHash = "TestPassword123!",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "100b408a-bdd0-4c2b-91d9-63e2dcc8f23b",
+                            SecurityStamp = "0085cf1f-0b34-4fc4-83cb-837b8b6649ea",
                             TwoFactorEnabled = false,
                             UserName = "test1@hotmail.com"
                         });
@@ -344,7 +344,7 @@ namespace StudiePlannerBlazor.Server.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2021, 3, 13, 15, 40, 21, 346, DateTimeKind.Local).AddTicks(8047),
+                            Date = new DateTime(2021, 3, 14, 10, 42, 23, 664, DateTimeKind.Local).AddTicks(5492),
                             Email = "Appointment1@hotmail.com",
                             PersonalContact = true,
                             TelephoneNumber = "0123-456789"

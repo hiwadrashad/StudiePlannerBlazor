@@ -10,8 +10,8 @@ using StudiePlannerBlazor.Server.Data;
 namespace StudiePlannerBlazor.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210308131726_SeedData2_Update")]
-    partial class SeedData2_Update
+    [Migration("20210309094223_SeedData3")]
+    partial class SeedData3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -307,13 +307,13 @@ namespace StudiePlannerBlazor.Server.Migrations
                         {
                             Id = "SeedUser1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f69df5c6-32da-40c7-8144-57af57d0dc6d",
+                            ConcurrencyStamp = "a80c7d2a-ecb6-47ec-a13c-d8c15bfd7ce3",
                             Email = "test1@hotmail.com",
-                            EmailConfirmed = false,
+                            EmailConfirmed = true,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEHjsKXdmWBh2n4LMr60mo3b2zma6XZaCba6v+X60OzGPBYq3uPsddtQM1ruMNH1OCg==",
+                            PasswordHash = "TestPassword123!",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6b3629fb-01de-4683-93d7-40c201afa580",
+                            SecurityStamp = "0085cf1f-0b34-4fc4-83cb-837b8b6649ea",
                             TwoFactorEnabled = false,
                             UserName = "test1@hotmail.com"
                         });
@@ -346,7 +346,7 @@ namespace StudiePlannerBlazor.Server.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2021, 3, 13, 14, 17, 25, 924, DateTimeKind.Local).AddTicks(9251),
+                            Date = new DateTime(2021, 3, 14, 10, 42, 23, 664, DateTimeKind.Local).AddTicks(5492),
                             Email = "Appointment1@hotmail.com",
                             PersonalContact = true,
                             TelephoneNumber = "0123-456789"
