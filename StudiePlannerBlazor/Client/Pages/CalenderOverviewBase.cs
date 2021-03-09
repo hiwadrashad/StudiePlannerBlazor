@@ -14,8 +14,6 @@ namespace StudiePlannerBlazor.Client.Pages
     {
         [Inject]
         public IDataService<TaskModel> TaskDataService { get; set; }
-        [Inject]
-        public IDataService<CalenderModel> CalenderDataService { get; set; }
         public List<TaskModel> Tasks { get; set; } = new List<TaskModel> { };
         private Timer time;
         protected NotificationComponentStart Taskstartednotification { get; set; } = new NotificationComponentStart { ShowDialog = false};

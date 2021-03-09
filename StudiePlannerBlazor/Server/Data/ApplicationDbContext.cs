@@ -22,77 +22,56 @@ namespace StudiePlannerBlazor.Server.Data
         }
 
         public DbSet<AppointmentModel> Appointments { get; set; }
-        public DbSet<CalenderModel> Calenders { get; set; }
         public DbSet<TaskModel> Tasks { get; set; }
-        public DbSet<ApplicationUser> Application { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             //builder.Entity<IdentityUserLogin>().HasKey(m => m.UserId);
             //builder.Entity<IdentityUserRole>().HasKey(m => m.UserId);
+
             base.OnModelCreating(builder);
-            var iditem = Guid.NewGuid().ToString();
-            builder.Entity<ApplicationUser>().HasData(new IdentityUser
+
+            var hasher = new PasswordHasher<ApplicationUser>();
+
+            builder.Entity<ApplicationUser>().HasData(new ApplicationUser
             {
-                Id = iditem,
-                Email = "test@hotmail.com",
-                UserName = "test@hotmail.com"
+                Id = "SeedUser1",
+                Email = "test1@hotmail.com",
+                UserName = "test1@hotmail.com",
+                //PasswordHash = hasher.HashPassword(null, "Passw0rd!")
+                PasswordHash = "TestPassword123!"
             });
-            //ApplicationUser appuser = new ApplicationUser()
-            //{
-            //    Id = Guid.NewGuid().ToString(),
-            //    Email = "test@hotmail.com",
-            //};
+
+            builder.Entity<AppointmentModel>().HasData(new AppointmentModel
+            {
+                Id = 1,
+                Email = "Appointment1@hotmail.com",
+                PersonalContact = true,
+                Date = DateTime.Now.AddDays(5),
+                TelephoneNumber = "0123-456789"
+            });
 
             builder.Entity<TaskModel>().HasData(new TaskModel
             {
                 Id = 1,
-                CalenderId = 1,
+                ApplicationUserId = "SeedUser1",
+                AppointmentId = 1,
                 Name = "Work order for February",
                 StartDate = DateTime.ParseExact("01/02/2021", "dd/MM/yyyy", null),
                 EndDate = DateTime.ParseExact("01/03/2021", "dd/MM/yyyy", null),
-                Status = Shared.Models.TaskStatus.Done
+                Status = Shared.Models.TaskStatus.Done, 
+                Notes = "geen aantekeningen"
             });
             builder.Entity<TaskModel>().HasData(new TaskModel
             {
                 Id = 2,
-                CalenderId = 1,
+                ApplicationUserId = "SeedUser1",
+                AppointmentId = 1,
                 Name = "Work order for March",
                 StartDate = DateTime.ParseExact("01/03/2021", "dd/MM/yyyy", null),
                 EndDate = DateTime.ParseExact("01/04/2021", "dd/MM/yyyy", null),
-                Status = Shared.Models.TaskStatus.Busy
-            });
-            builder.Entity<CalenderModel>().HasData(new CalenderModel
-            {
-                CalenderId = 1,
-
-                //UserId = iditem
-
-                //Tasks = new List<TaskModel>()
-                //{
-                //    new TaskModel
-                //    {
-                //        Id = 4,
-                //        Name = "Work order for February",
-                //        StartDate = DateTime.ParseExact("01/02/2021", "dd/MM/yyyy", null),
-                //        EndDate = DateTime.ParseExact("01/03/2021", "dd/MM/yyyy", null),
-                //        Status = Shared.Models.TaskStatus.Done
-                //    },
-                //    new TaskModel
-                //    {
-                //        Id = 5,
-                //        Name = "Work order for March",
-                //        StartDate = DateTime.ParseExact("01/03/2021", "dd/MM/yyyy", null),
-                //        EndDate = DateTime.ParseExact("01/04/2021", "dd/MM/yyyy", null),
-                //        Status = Shared.Models.TaskStatus.Busy
-                //    }
-                //},
-
-                //User = appuser
-                UserId = iditem,
-                //TaskId = new List<int> { 1 },
-                //User = new ApplicationUser { Id = Guid.NewGuid().ToString(), Email = "test@hotmail.com", UserName = "test@hotmail.com" }
-
+                Status = Shared.Models.TaskStatus.Busy,
+                Notes = "geen aantekeningen"
             });
         }
     }
