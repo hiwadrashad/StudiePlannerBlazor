@@ -1,16 +1,13 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.Extensions.DependencyInjection;
+using NUnit.Framework;
 using StudiePlannerBlazor.Client.DataService;
 using StudiePlannerBlazor.Shared.Models;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using System.Linq;
+using System.Threading.Tasks;
 
-namespace UnitTesting.UnitTesting
+namespace UnitTesting
 {
-    [TestClass]
     public class UnitTesting
     {
         private IDataService<TaskModel> taskrepo { get; set; }
@@ -20,12 +17,12 @@ namespace UnitTesting.UnitTesting
 
         public TaskModel taskmodel = new TaskModel()
         {
-           Id = 123456,
-           Name = "test",
-           Notes = "test",
-           Status = StudiePlannerBlazor.Shared.Models.TaskStatus.Busy,
-           StartDate = DateTime.Now,
-           EndDate = DateTime.Now
+            Id = 123456,
+            Name = "test",
+            Notes = "test",
+            Status = StudiePlannerBlazor.Shared.Models.TaskStatus.Busy,
+            StartDate = DateTime.Now,
+            EndDate = DateTime.Now
         };
 
         public AppointmentModel appointmentmodel = new AppointmentModel()
@@ -67,8 +64,8 @@ namespace UnitTesting.UnitTesting
             }
         }
 
-        [TestMethod]
-        [TestCategory("Post")]
+        [Test]
+        [Category("Post")]
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task AddTask()
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
@@ -78,12 +75,12 @@ namespace UnitTesting.UnitTesting
             var item = await taskrepo.GetAll();
             if (item.Contains(taskmodel))
             {
-              await taskrepo.Delete(taskmodel.Id);
+                await taskrepo.Delete(taskmodel.Id);
             }
         }
 
-        [TestMethod]
-        [TestCategory("Post")]
+        [Test]
+        [Category("Post")]
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task AddAppointment()
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
@@ -96,8 +93,8 @@ namespace UnitTesting.UnitTesting
                 await appointmentrepo.Delete(appointmentmodel.Id);
             }
         }
-        [TestMethod]
-        [TestCategory("Delete")]
+        [Test]
+        [Category("Delete")]
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task DeleteTask()
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
@@ -112,8 +109,8 @@ namespace UnitTesting.UnitTesting
             }
         }
 
-        [TestMethod]
-        [TestCategory("Delete")]
+        [Test]
+        [Category("Delete")]
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task DeleteAppointment()
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
@@ -128,8 +125,8 @@ namespace UnitTesting.UnitTesting
             }
         }
 
-        [TestMethod]
-        [TestCategory("GetAll")]
+        [Test]
+        [Category("GetAll")]
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task GetAllTasks()
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
@@ -138,8 +135,8 @@ namespace UnitTesting.UnitTesting
             NUnit.Framework.Assert.DoesNotThrowAsync(async () => await taskrepo.GetAll(), "Get all tasks not properly executed");
         }
 
-        [TestMethod]
-        [TestCategory("GetAll")]
+        [Test]
+        [Category("GetAll")]
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task GetAllAppointments()
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
@@ -148,8 +145,8 @@ namespace UnitTesting.UnitTesting
             NUnit.Framework.Assert.DoesNotThrowAsync(async () => await appointmentrepo.GetAll(), "Get all appointments not properly executed");
         }
 
-        [TestMethod]
-        [TestCategory("Get")]
+        [Test]
+        [Category("Get")]
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task GetTask()
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
@@ -164,8 +161,8 @@ namespace UnitTesting.UnitTesting
             }
         }
 
-        [TestMethod]
-        [TestCategory("Get")]
+        [Test]
+        [Category("Get")]
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task GetAppointment()
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
