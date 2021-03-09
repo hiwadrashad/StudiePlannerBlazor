@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudiePlannerBlazor.Client"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudiePlannerBlazor.Shared", "StudiePlannerBlazor\Shared\StudiePlannerBlazor.Shared.csproj", "{E8CD1829-778B-47DA-AE99-F0E79B1790FB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTesting", "UnitTesting\UnitTesting.csproj", "{2E1B6FE6-4999-4527-AD98-D07457492594}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{E8CD1829-778B-47DA-AE99-F0E79B1790FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8CD1829-778B-47DA-AE99-F0E79B1790FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8CD1829-778B-47DA-AE99-F0E79B1790FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E1B6FE6-4999-4527-AD98-D07457492594}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E1B6FE6-4999-4527-AD98-D07457492594}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E1B6FE6-4999-4527-AD98-D07457492594}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E1B6FE6-4999-4527-AD98-D07457492594}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

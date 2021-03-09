@@ -1,6 +1,8 @@
 ﻿@page "/"
+@using Microsoft.AspNetCore.Authorization;
+@attribute [Authorize]
 @inherits CalenderOverviewBase
-        <link href="/css/Background.css" rel="stylesheet" />
+<link href="/css/Background.css" rel="stylesheet" />
 <style>
     .card {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -21,7 +23,6 @@
     .imageclass {
         max-width: 300px;
     }
-
 </style>
 <a href="@($"addtask")" class="btn btn-primary table-btn">
     add task
@@ -38,28 +39,28 @@ else
     foreach (var item in Tasks)
     {
 
-<div class="card">
-    <img class="imageclass" src="/Images/task2_icon.png" />
-    <h1>@item.Name</h1>
-    <p class="title">Start date</p>
-    <p>@item.StartDate.ToString()</p>
-    <p class="title">End date</p>
-    <p>@item.EndDate.ToString()</p>
-    <p class="title">Status</p>
-    <p>@item.Status.ToString()</p>
-    <a href="@($"deletetask/{item.Id.ToString()}")" class="btn btn-primary table-btn">
-        Delete task
-    </a>
-    <a href="@($"edittask/{item.Id.ToString()}")" class="btn btn-primary table-btn">
-        Edit task
-    </a>
-    @*<a href="@($"taskdetails/{item.Id}")" class="btn btn-primary table-btn">
-            Task details
-        </a>*@
-    <a href="@($"taskdetails/{item.Name.ToString()}")" class="btn btn-primary table-btn">
-        Task details
-    </a>
-</div>
+        <div class="card">
+            <img class="imageclass" src="/Images/task2_icon.png" />
+            <h1>@item.Name</h1>
+            <p class="title">Start date</p>
+            <p>@item.StartDate.ToString()</p>
+            <p class="title">End date</p>
+            <p>@item.EndDate.ToString()</p>
+            <p class="title">Status</p>
+            <p>@item.Status.ToString()</p>
+            <a href="@($"deletetask/{item.Id.ToString()}")" class="btn btn-primary table-btn">
+                Delete task
+            </a>
+            <a href="@($"edittask/{item.Id.ToString()}")" class="btn btn-primary table-btn">
+                Edit task
+            </a>
+            @*<a href="@($"taskdetails/{item.Id}")" class="btn btn-primary table-btn">
+                    Task details
+                </a>*@
+            <a href="@($"taskdetails/{item.Name.ToString()}")" class="btn btn-primary table-btn">
+                Task details
+            </a>
+        </div>
 
     }
 
