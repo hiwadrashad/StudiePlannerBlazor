@@ -15,7 +15,7 @@ namespace StudiePlannerBlazor.Server.Controllers
     public class AppointmentController : ControllerBase
     {
         public readonly IRepository<AppointmentModel> _repository;
-
+        
         public AppointmentController(IRepository<AppointmentModel> repository)
         {
             _repository = repository;
