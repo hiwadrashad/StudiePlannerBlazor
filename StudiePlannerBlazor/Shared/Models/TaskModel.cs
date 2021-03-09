@@ -16,17 +16,20 @@ namespace StudiePlannerBlazor.Shared.Models
     {
         [Key]
         public int Id { get; set; }
-        public int CalenderId { get; set; }
+
+        [ForeignKey("AppointmentModel")]
+        public int AppointmentId { get; set; }
+        public AppointmentModel Appointment { get; set; }
+
+        [ForeignKey("ApplicationUser")]
+        public string ApplicationUserId { get; set; }
+        public ApplicationUser User { get; set; }
+
         public string Name { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public TaskStatus Status { get; set; }
         public string Notes { get; set; }
-#nullable enable
-        public int? AppointmentId { get; set; }
-#nullable disable
-        [ForeignKey("AppointmentId")]
-        public AppointmentModel Appointment { get; set; }
         public IEnumerable<DocumentModel> Documents { get; set; }
     }
 }
