@@ -38,7 +38,8 @@ namespace StudiePlannerBlazor.Server.Data
                 Id = "SeedUser1",
                 Email = "test1@hotmail.com",
                 UserName = "test1@hotmail.com",
-                PasswordHash = hasher.HashPassword(null, "Passw0rd!")
+                //PasswordHash = hasher.HashPassword(null, "Passw0rd!")
+                PasswordHash = "TestPassword123!"
             });
 
             builder.Entity<AppointmentModel>().HasData(new AppointmentModel
