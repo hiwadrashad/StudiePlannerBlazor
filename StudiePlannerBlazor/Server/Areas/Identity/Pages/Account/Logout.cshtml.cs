@@ -30,6 +30,7 @@ namespace StudiePlannerBlazor.Server.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPost(string returnUrl = null)
         {
             await _signInManager.SignOutAsync();
+            Client.StaticResources.CurrentIdentityUser.appuser = null;
             _logger.LogInformation("User logged out.");
             if (returnUrl != null)
             {
