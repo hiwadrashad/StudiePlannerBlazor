@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace UnitTesting.UnitTesting
 {
@@ -19,7 +20,7 @@ namespace UnitTesting.UnitTesting
 
         public TaskModel taskmodel = new TaskModel()
         {
-           Id = 10,
+           Id = 123456,
            Name = "test",
            Notes = "test",
            Status = StudiePlannerBlazor.Shared.Models.TaskStatus.Busy,
@@ -32,7 +33,7 @@ namespace UnitTesting.UnitTesting
             Date = DateTime.Now,
             Email = "test@hotmail.com",
             PersonalContact = true,
-            Id = 11,
+            Id = 234567,
             TelephoneNumber = "test"
         };
 
@@ -74,6 +75,11 @@ namespace UnitTesting.UnitTesting
         {
             TaskDependencyInjection();
             NUnit.Framework.Assert.DoesNotThrowAsync(async () => await taskrepo.Add(taskmodel), "not added task properly");
+            var item = await taskrepo.GetAll();
+            if (item.Contains(taskmodel))
+            {
+              await taskrepo.Delete(taskmodel.Id);
+            }
         }
 
         [TestMethod]
@@ -83,7 +89,95 @@ namespace UnitTesting.UnitTesting
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             AppointmentDependencyInjection();
-            NUnit.Framework.Assert.DoesNotThrowAsync(async () => await appointmentrepo.Add(appointmentmodel), "not added task properly");
+            NUnit.Framework.Assert.DoesNotThrowAsync(async () => await appointmentrepo.Add(appointmentmodel), "not added appointment properly");
+            var item = await appointmentrepo.GetAll();
+            if (item.Contains(appointmentmodel))
+            {
+                await appointmentrepo.Delete(appointmentmodel.Id);
+            }
+        }
+        [TestMethod]
+        [TestCategory("Delete")]
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+        public async Task DeleteTask()
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+        {
+            TaskDependencyInjection();
+            await taskrepo.Add(taskmodel);
+            NUnit.Framework.Assert.DoesNotThrowAsync(async () => await taskrepo.Delete(taskmodel.Id), "not deleted task properly");
+            var item = await taskrepo.GetAll();
+            if (item.Contains(taskmodel))
+            {
+                await taskrepo.Delete(taskmodel.Id);
+            }
+        }
+
+        [TestMethod]
+        [TestCategory("Delete")]
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+        public async Task DeleteAppointment()
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+        {
+            AppointmentDependencyInjection();
+            await appointmentrepo.Add(appointmentmodel);
+            NUnit.Framework.Assert.DoesNotThrowAsync(async () => await appointmentrepo.Delete(appointmentmodel.Id), "not deleted appointment properly");
+            var item = await appointmentrepo.GetAll();
+            if (item.Contains(appointmentmodel))
+            {
+                await appointmentrepo.Delete(appointmentmodel.Id);
+            }
+        }
+
+        [TestMethod]
+        [TestCategory("GetAll")]
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+        public async Task GetAllTasks()
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+        {
+            TaskDependencyInjection();
+            NUnit.Framework.Assert.DoesNotThrowAsync(async () => await taskrepo.GetAll(), "Get all tasks not properly executed");
+        }
+
+        [TestMethod]
+        [TestCategory("GetAll")]
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+        public async Task GetAllAppointments()
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+        {
+            AppointmentDependencyInjection();
+            NUnit.Framework.Assert.DoesNotThrowAsync(async () => await appointmentrepo.GetAll(), "Get all appointments not properly executed");
+        }
+
+        [TestMethod]
+        [TestCategory("Get")]
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+        public async Task GetTask()
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+        {
+            TaskDependencyInjection();
+            await taskrepo.Add(taskmodel);
+            NUnit.Framework.Assert.DoesNotThrowAsync(async () => await taskrepo.GetById(taskmodel.Id), "Not retrieved task properly");
+            var item = await taskrepo.GetAll();
+            if (item.Contains(taskmodel))
+            {
+                await taskrepo.Delete(taskmodel.Id);
+            }
+        }
+
+        [TestMethod]
+        [TestCategory("Get")]
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+        public async Task GetAppointment()
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+        {
+            AppointmentDependencyInjection();
+            await appointmentrepo.Add(appointmentmodel);
+            NUnit.Framework.Assert.DoesNotThrowAsync(async () => await appointmentrepo.GetById(appointmentmodel.Id), "Not retrieved appointment properly");
+            var item = await appointmentrepo.GetAll();
+            if (item.Contains(appointmentmodel))
+            {
+                await appointmentrepo.Delete(appointmentmodel.Id);
+            }
         }
     }
 }
