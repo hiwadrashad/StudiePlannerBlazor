@@ -6,9 +6,9 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace UnitTesting
+namespace UnitTest
 {
-    public class UnitTesting
+    public class UnitTest
     {
         private IDataService<TaskModel> taskrepo { get; set; }
         private IDataService<AppointmentModel> appointmentrepo { get; set; }
