@@ -64,6 +64,7 @@ namespace StudiePlannerBlazor.Server.Data
             });
             builder.Entity<TaskModel>().HasData(new TaskModel
             {
+                
                 Id = 2,
                 ApplicationUserId = "SeedUser1",
                 AppointmentId = 1,

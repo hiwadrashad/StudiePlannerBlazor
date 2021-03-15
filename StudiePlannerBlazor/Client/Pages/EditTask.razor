@@ -9,7 +9,12 @@
 @using System.Linq;
 @using System.Threading.Tasks;
 <link href="/css/Background.css" rel="stylesheet" />
-
+@if (model == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
 <section class="add">
     <h1 class="page-title">Edit task</h1>
     <EditForm Model="model" OnInvalidSubmit="RedirectError" OnValidSubmit="EditingTask">
@@ -53,6 +58,8 @@
             <InputText class="form-control" @bind-Value="@model.Notes"></InputText>
             <ValidationMessage For="@(() => model.Notes)" />
         </div>
+        @if (model.Appointment != null)
+        {
         <div class="form-group row">
             <label class="col-sm-3"> Telephone number</label>
             <InputText class="form-control" @bind-Value="@model.Appointment.TelephoneNumber"></InputText>
@@ -72,11 +79,12 @@
             <label>Documents </label>
             <input type="file" />
         </div>
-
-        <button type="submit" class="btn btn-primary">Create task</button>
+        }
+        <button type="submit" class="btn btn-primary">Edit task</button>
     </EditForm>
 
 </section>
+}
 @code {
     [Inject]
     public IDataService<TaskModel> TaskDataService { get; set; }
