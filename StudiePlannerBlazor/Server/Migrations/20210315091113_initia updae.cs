@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace StudiePlannerBlazor.Server.Migrations
 {
-    public partial class SeedData2 : Migration
+    public partial class initiaupdae : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -256,12 +256,12 @@ namespace StudiePlannerBlazor.Server.Migrations
             migrationBuilder.InsertData(
                 table: "Appointments",
                 columns: new[] { "Id", "Date", "Email", "PersonalContact", "TelephoneNumber" },
-                values: new object[] { 1, new DateTime(2021, 3, 13, 13, 56, 41, 946, DateTimeKind.Local).AddTicks(7484), "Appointment1@hotmail.com", true, "0123-456789" });
+                values: new object[] { 1, new DateTime(2021, 3, 20, 10, 11, 12, 840, DateTimeKind.Local).AddTicks(8371), "Appointment1@hotmail.com", true, "0123-456789" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "SeedUser1", 0, "546b727a-610b-4566-8bfc-7ab452fa5d73", "test1@hotmail.com", false, false, null, null, null, null, null, false, "1dd81378-7601-4083-8ada-fe7dac5ee27f", false, "test1@hotmail.com" });
+                values: new object[] { "SeedUser1", 0, "dd724000-f22d-4c3e-b44f-392a4c10e059", "test1@hotmail.com", false, false, null, null, null, "TestPassword123!", null, false, "1799f3d7-b4b1-4407-abf2-036962c3dd63", false, "test1@hotmail.com" });
 
             migrationBuilder.InsertData(
                 table: "Tasks",

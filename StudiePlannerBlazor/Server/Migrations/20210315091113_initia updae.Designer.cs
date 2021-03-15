@@ -10,8 +10,8 @@ using StudiePlannerBlazor.Server.Data;
 namespace StudiePlannerBlazor.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210308131726_SeedData2_Update")]
-    partial class SeedData2_Update
+    [Migration("20210315091113_initia updae")]
+    partial class initiaupdae
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -307,13 +307,13 @@ namespace StudiePlannerBlazor.Server.Migrations
                         {
                             Id = "SeedUser1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f69df5c6-32da-40c7-8144-57af57d0dc6d",
+                            ConcurrencyStamp = "dd724000-f22d-4c3e-b44f-392a4c10e059",
                             Email = "test1@hotmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEHjsKXdmWBh2n4LMr60mo3b2zma6XZaCba6v+X60OzGPBYq3uPsddtQM1ruMNH1OCg==",
+                            PasswordHash = "TestPassword123!",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6b3629fb-01de-4683-93d7-40c201afa580",
+                            SecurityStamp = "1799f3d7-b4b1-4407-abf2-036962c3dd63",
                             TwoFactorEnabled = false,
                             UserName = "test1@hotmail.com"
                         });
@@ -346,7 +346,7 @@ namespace StudiePlannerBlazor.Server.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2021, 3, 13, 14, 17, 25, 924, DateTimeKind.Local).AddTicks(9251),
+                            Date = new DateTime(2021, 3, 20, 10, 11, 12, 840, DateTimeKind.Local).AddTicks(8371),
                             Email = "Appointment1@hotmail.com",
                             PersonalContact = true,
                             TelephoneNumber = "0123-456789"
