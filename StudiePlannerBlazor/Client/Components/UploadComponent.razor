@@ -1,0 +1,41 @@
+﻿<input type="file" @ref="_input" @onchange="HandleSelected" />
+@if(Documents.Count > 0)
+{
+    @for(int i = 0; i < Documents.Count; i++)
+    {
+        <a href="@Documents[i].Path">Document @i</a>
+    }
+}
+
+@code {
+    private ElementReference _input;
+
+    [Parameter]
+    public EventCallback<List<DocumentModel>> OnChange { get; set; }
+    [Inject]
+    public IFileReaderService FileReaderService { get; set; }
+    [Inject]
+    public IUploadDataService Repository { get; set; }
+    public List<DocumentModel> Documents { get; set; }
+
+    private async Task HandleSelected()
+    {
+        foreach (var file in await FileReaderService.CreateReference(_input).EnumerateFilesAsync())
+        {
+            if (file != null)
+            {
+                var fileInfo = await file.ReadFileInfoAsync();
+                using (var ms = await file.CreateMemoryStreamAsync(4 * 1024))
+                {
+                    var content = new MultipartFormDataContent();
+                    content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data");
+                    content.Add(new StreamContent(ms, Convert.ToInt32(ms.Length)), "file", fileInfo.Name);
+                    var document = await Repository.UploadFile(content);
+                    Documents.Add(document);
+                }
+            }
+        }
+
+        await OnChange.InvokeAsync(Documents);
+    }
+}

@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Tewr.Blazor.FileReader;
 
 namespace StudiePlannerBlazor.Client
 {
@@ -35,7 +36,8 @@ namespace StudiePlannerBlazor.Client
             {
                 client.BaseAddress = uri;
             });
-   
+            builder.Services.AddScoped<IUploadDataService, TaskDataService>();
+            builder.Services.AddFileReaderService();
 
             builder.Services.AddApiAuthorization();
 

@@ -14,6 +14,9 @@ using StudiePlannerBlazor.Server.Data;
 using StudiePlannerBlazor.Shared.Models;
 using StudiePlannerBlazor.Server.Repositories;
 using System.Linq;
+using System.IO;
+using Microsoft.Extensions.FileProviders;
+using Microsoft.AspNetCore.Http;
 
 namespace StudiePlannerBlazor.Server
 {
@@ -69,6 +72,11 @@ namespace StudiePlannerBlazor.Server
             app.UseHttpsRedirection();
             app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"StaticFiles")),
+                RequestPath = new PathString("/StaticFiles")
+            });
 
             app.UseRouting();
 
