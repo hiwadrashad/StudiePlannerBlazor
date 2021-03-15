@@ -16,7 +16,7 @@
     public IFileReaderService FileReaderService { get; set; }
     [Inject]
     public IUploadDataService Repository { get; set; }
-    public List<DocumentModel> Documents { get; set; }
+    public List<DocumentModel> Documents { get; set; } = new List<DocumentModel>();
 
     private async Task HandleSelected()
     {
