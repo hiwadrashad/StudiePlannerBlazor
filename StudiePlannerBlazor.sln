@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudiePlannerBlazor.Client"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudiePlannerBlazor.Shared", "StudiePlannerBlazor\Shared\StudiePlannerBlazor.Shared.csproj", "{E8CD1829-778B-47DA-AE99-F0E79B1790FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{9B7B8110-0E8A-4CF7-B674-500949D3BE97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTest", "UnitTest\UnitTest.csproj", "{9B7B8110-0E8A-4CF7-B674-500949D3BE97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

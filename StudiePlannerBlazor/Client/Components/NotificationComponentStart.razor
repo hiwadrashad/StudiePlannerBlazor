@@ -1,4 +1,7 @@
-﻿<div class="modal fade show d-block" id="exampleModal" tabindex="-1" role="dialog">
+﻿@*@using StudiePlannerBlazor.Client.Pages;
+@inherits CalenderOverviewBase*@
+
+<div class="modal fade show d-block" id="exampleModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -9,15 +12,16 @@
             </div>
             <div class="modal-body">
 
-                    <div class="form-group">
-                        <label>@TextToShow </label>
-                    </div>
-                    <a class="btn btn-outline-primary" @onclick="@Close">Close</a>
+                <div class="form-group">
+                    <label>@TextToShow </label>
+                </div>
+                <a class="btn btn-outline-primary" @onclick="@Close">Close</a>
 
             </div>
         </div>
     </div>
 </div>
+
 @code {
     public string TextToShow { get; set; }
     public bool ShowDialog { get; set; }

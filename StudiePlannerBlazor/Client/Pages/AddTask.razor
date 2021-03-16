@@ -82,10 +82,11 @@
     public IDataService<AppointmentModel> AppointmentDataService { get; set; }
     [Inject]
     public NavigationManager NavManager { get; set; }
-    public TaskModel model { get; set; } = new TaskModel { Appointment = new AppointmentModel { } };
+    public TaskModel model { get; set; } = new TaskModel { StartDate = DateTime.Now, EndDate = DateTime.Now.AddHours(1), Appointment = new AppointmentModel { } };
 
     public async void AddingTask()
     {
+        
         await TaskDataService.Add(model);
 
         //<summary> apply list of logged in identity instead of all stored tasks / get identity running first

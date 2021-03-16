@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using StudiePlannerBlazor.Client.DataService;
+using StudiePlannerBlazor.Client.GeneralMethods;
 using StudiePlannerBlazor.Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace StudiePlannerBlazor.Client
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
-
+            builder.Services.AddScoped<IToastService, ToastService>();
             builder.Services.AddHttpClient("StudiePlannerBlazor.ServerAPI", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
                 .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using StudiePlannerBlazor.Client.Components;
 using StudiePlannerBlazor.Client.DataService;
+using StudiePlannerBlazor.Client.GeneralMethods;
 using StudiePlannerBlazor.Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -13,20 +14,25 @@ namespace StudiePlannerBlazor.Client.Pages
     public partial class CalenderOverviewBase : ComponentBase
     {
         [Inject]
+        public IToastService toastService { get; set; }
+
+        [Inject]
         public IDataService<TaskModel> TaskDataService { get; set; }
         public List<TaskModel> Tasks { get; set; } = new List<TaskModel> { };
         private Timer time;
         protected NotificationComponentStart Taskstartednotification { get; set; } = new NotificationComponentStart { ShowDialog = false};
         protected NotificationComponentEnd Tasksendednotification { get; set; } = new NotificationComponentEnd { ShowDialog = false };
-
+        private static object Lock = new object();
         protected override async Task OnInitializedAsync()
         {
             Tasks = (await TaskDataService.GetAll()).ToList();
-
-            //time = new Timer();
-            //time.Elapsed += new System.Timers.ElapsedEventHandler(Timerexecutioncode);
-            //time.Interval = 1000;
-            //time.Start();
+            //lock (Lock)
+            //{
+            //    time = new Timer();
+            //    time.Elapsed += new System.Timers.ElapsedEventHandler(Timerexecutioncode);
+            //    time.Interval = 1000;
+            //    time.Start();
+            //}
 
             //<summary> apply list of logged in identity instead of all stored tasks / get identity running first
             //var users = await CalenderDataService.GetAll();
@@ -61,12 +67,17 @@ namespace StudiePlannerBlazor.Client.Pages
         private async void Timerexecutioncode(object sender, ElapsedEventArgs e)
         {
             var items = await TaskDataService.GetAll();
-            if (items.Where(a => a.StartDate == DateTime.Now).Any())
+            var itemsabovecurrenttime = items.Where(a => a.StartDate > DateTime.Now);
+            if (items.Where(a => a.StartDate > DateTime.Now).Any())
             {
-                var itemtoshow = items.Where(a => a.StartDate == DateTime.Now).FirstOrDefault();
-                string texttoshow = itemtoshow.Name = " " + "has started";
-                Taskstartednotification.TextToShow = texttoshow;
-                ShowMessageStart();
+                if (items.Where(a => a.StartDate < DateTime.Now.AddSeconds(1)).Any())
+                {
+                    var itemasabovecurrenttime = items.Where(a => a.StartDate > DateTime.Now);
+                    var itemundercutofftime = itemsabovecurrenttime.Where(a => a.StartDate < DateTime.Now.AddSeconds(1)).FirstOrDefault();
+                    string texttoshow = itemundercutofftime.Name = " " + "has started";
+                    Taskstartednotification.TextToShow = texttoshow;
+                    ShowMessageStart();
+                }
             }
             //if (Taskstartednotification.ShowDialog == false && items.Where(a => a.EndDate == DateTime.Now).Any())
             //{
