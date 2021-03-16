@@ -305,15 +305,15 @@ namespace StudiePlannerBlazor.Server.Migrations
                         {
                             Id = "SeedUser1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "50da17b7-b482-4ede-8391-b3741071f1a4",
+                            ConcurrencyStamp = "9e6ff3b7-0fd5-414e-8664-d12afbd49a9d",
                             Email = "test1@hotmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "TEST1@HOTMAIL.COM",
                             NormalizedUserName = "TEST1@HOTMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAECfOcT2b/fNnPS5ZC65YKIKecfzwGKUmFhOLZNHeXh6USPmuEXN838VrMNVNJxuhNw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEPn3wzvyYAzvwT8elYZ6tRPhs3OuDSQpDmG2GrdMB7EI+K7oRpH288iU4+SGxx7Ug==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fa0b2f41-27d7-4777-8634-f3a2dffc3ee8",
+                            SecurityStamp = "71d1ace5-cc8c-4310-a28e-e5d48fbd0c76",
                             TwoFactorEnabled = false,
                             UserName = "test1@hotmail.com"
                         });
@@ -346,7 +346,7 @@ namespace StudiePlannerBlazor.Server.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2021, 3, 21, 14, 45, 11, 110, DateTimeKind.Local).AddTicks(5610),
+                            Date = new DateTime(2021, 3, 21, 14, 56, 52, 803, DateTimeKind.Local).AddTicks(548),
                             Email = "Appointment1@hotmail.com",
                             PersonalContact = true,
                             TelephoneNumber = "0123-456789"

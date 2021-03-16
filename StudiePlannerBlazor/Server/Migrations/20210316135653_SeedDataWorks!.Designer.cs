@@ -10,8 +10,8 @@ using StudiePlannerBlazor.Server.Data;
 namespace StudiePlannerBlazor.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210316132947_SeedData_Update4")]
-    partial class SeedData_Update4
+    [Migration("20210316135653_SeedDataWorks!")]
+    partial class SeedDataWorks
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -128,15 +128,6 @@ namespace StudiePlannerBlazor.Server.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "6be4cb1b-9574-4132-8b97-bf04e4e12a9d",
-                            ConcurrencyStamp = "93ebb825-3f8b-4595-bea5-02e0827d92ed",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -310,6 +301,24 @@ namespace StudiePlannerBlazor.Server.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "SeedUser1",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "9e6ff3b7-0fd5-414e-8664-d12afbd49a9d",
+                            Email = "test1@hotmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "TEST1@HOTMAIL.COM",
+                            NormalizedUserName = "TEST1@HOTMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEPn3wzvyYAzvwT8elYZ6tRPhs3OuDSQpDmG2GrdMB7EI+K7oRpH288iU4+SGxx7Ug==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "71d1ace5-cc8c-4310-a28e-e5d48fbd0c76",
+                            TwoFactorEnabled = false,
+                            UserName = "test1@hotmail.com"
+                        });
                 });
 
             modelBuilder.Entity("StudiePlannerBlazor.Shared.Models.AppointmentModel", b =>
@@ -339,7 +348,7 @@ namespace StudiePlannerBlazor.Server.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2021, 3, 21, 14, 29, 47, 668, DateTimeKind.Local).AddTicks(7421),
+                            Date = new DateTime(2021, 3, 21, 14, 56, 52, 803, DateTimeKind.Local).AddTicks(548),
                             Email = "Appointment1@hotmail.com",
                             PersonalContact = true,
                             TelephoneNumber = "0123-456789"
@@ -373,8 +382,8 @@ namespace StudiePlannerBlazor.Server.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ApplicationUserEmail")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("AppointmentId")
                         .HasColumnType("int");
@@ -394,14 +403,11 @@ namespace StudiePlannerBlazor.Server.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("AppointmentId");
+                    b.HasIndex("ApplicationUserId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("AppointmentId");
 
                     b.ToTable("Tasks");
 
@@ -409,7 +415,7 @@ namespace StudiePlannerBlazor.Server.Migrations
                         new
                         {
                             Id = 1,
-                            ApplicationUserEmail = "test1@hotmail.com",
+                            ApplicationUserId = "SeedUser1",
                             AppointmentId = 1,
                             EndDate = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Work order for February",
@@ -420,7 +426,7 @@ namespace StudiePlannerBlazor.Server.Migrations
                         new
                         {
                             Id = 2,
-                            ApplicationUserEmail = "test1@hotmail.com",
+                            ApplicationUserId = "SeedUser1",
                             AppointmentId = 1,
                             EndDate = new DateTime(2021, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Work order for March",
@@ -490,15 +496,15 @@ namespace StudiePlannerBlazor.Server.Migrations
 
             modelBuilder.Entity("StudiePlannerBlazor.Shared.Models.TaskModel", b =>
                 {
+                    b.HasOne("StudiePlannerBlazor.Shared.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
+
                     b.HasOne("StudiePlannerBlazor.Shared.Models.AppointmentModel", "Appointment")
                         .WithMany()
                         .HasForeignKey("AppointmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("StudiePlannerBlazor.Shared.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }
