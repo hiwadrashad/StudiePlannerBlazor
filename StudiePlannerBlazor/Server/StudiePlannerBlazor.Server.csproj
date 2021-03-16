@@ -6,6 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20210315091113_initia updae.cs" />
+    <Compile Remove="Migrations\20210315091113_initia updae.Designer.cs" />
     <Compile Remove="Models\ApplicationUser.cs" />
   </ItemGroup>
 

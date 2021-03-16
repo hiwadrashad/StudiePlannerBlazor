@@ -10,8 +10,8 @@ using StudiePlannerBlazor.Server.Data;
 namespace StudiePlannerBlazor.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210315091113_initia updae")]
-    partial class initiaupdae
+    [Migration("20210316135653_SeedDataWorks!")]
+    partial class SeedDataWorks
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -307,13 +307,15 @@ namespace StudiePlannerBlazor.Server.Migrations
                         {
                             Id = "SeedUser1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "dd724000-f22d-4c3e-b44f-392a4c10e059",
+                            ConcurrencyStamp = "9e6ff3b7-0fd5-414e-8664-d12afbd49a9d",
                             Email = "test1@hotmail.com",
-                            EmailConfirmed = false,
+                            EmailConfirmed = true,
                             LockoutEnabled = false,
-                            PasswordHash = "TestPassword123!",
+                            NormalizedEmail = "TEST1@HOTMAIL.COM",
+                            NormalizedUserName = "TEST1@HOTMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEPn3wzvyYAzvwT8elYZ6tRPhs3OuDSQpDmG2GrdMB7EI+K7oRpH288iU4+SGxx7Ug==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1799f3d7-b4b1-4407-abf2-036962c3dd63",
+                            SecurityStamp = "71d1ace5-cc8c-4310-a28e-e5d48fbd0c76",
                             TwoFactorEnabled = false,
                             UserName = "test1@hotmail.com"
                         });
@@ -346,7 +348,7 @@ namespace StudiePlannerBlazor.Server.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2021, 3, 20, 10, 11, 12, 840, DateTimeKind.Local).AddTicks(8371),
+                            Date = new DateTime(2021, 3, 21, 14, 56, 52, 803, DateTimeKind.Local).AddTicks(548),
                             Email = "Appointment1@hotmail.com",
                             PersonalContact = true,
                             TelephoneNumber = "0123-456789"

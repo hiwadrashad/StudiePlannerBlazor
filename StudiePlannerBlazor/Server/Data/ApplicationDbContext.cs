@@ -14,7 +14,6 @@ namespace StudiePlannerBlazor.Server.Data
 {
     public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {
-
         public ApplicationDbContext(
             DbContextOptions options,
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
@@ -24,6 +23,9 @@ namespace StudiePlannerBlazor.Server.Data
         public DbSet<AppointmentModel> Appointments { get; set; }
         public DbSet<TaskModel> Tasks { get; set; }
 
+        
+
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             //builder.Entity<IdentityUserLogin>().HasKey(m => m.UserId);
@@ -31,15 +33,19 @@ namespace StudiePlannerBlazor.Server.Data
 
             base.OnModelCreating(builder);
 
+            //builder.Entity<IdentityRole>().HasData(new IdentityRole { Name = "Admin", NormalizedName = "Admin".ToUpper() });
+
             var hasher = new PasswordHasher<ApplicationUser>();
 
             builder.Entity<ApplicationUser>().HasData(new ApplicationUser
             {
                 Id = "SeedUser1",
                 Email = "test1@hotmail.com",
+                NormalizedEmail = "test1@hotmail.com".ToUpper(),
                 UserName = "test1@hotmail.com",
-                //PasswordHash = hasher.HashPassword(null, "Passw0rd!")
-                PasswordHash = "TestPassword123!"
+                NormalizedUserName = "test1@hotmail.com".ToUpper(),
+                PasswordHash = hasher.HashPassword(null, "Passw0rd!"),
+                EmailConfirmed = true,
             });
 
             builder.Entity<AppointmentModel>().HasData(new AppointmentModel
@@ -59,7 +65,7 @@ namespace StudiePlannerBlazor.Server.Data
                 Name = "Work order for February",
                 StartDate = DateTime.ParseExact("01/02/2021", "dd/MM/yyyy", null),
                 EndDate = DateTime.ParseExact("01/03/2021", "dd/MM/yyyy", null),
-                Status = Shared.Models.TaskStatus.Done, 
+                Status = Shared.Models.TaskStatus.Done,
                 Notes = "geen aantekeningen"
             });
             builder.Entity<TaskModel>().HasData(new TaskModel

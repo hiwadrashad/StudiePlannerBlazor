@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace StudiePlannerBlazor.Server.Migrations
 {
-    public partial class initiaupdae : Migration
+    public partial class SeedDataWorks : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -256,12 +256,12 @@ namespace StudiePlannerBlazor.Server.Migrations
             migrationBuilder.InsertData(
                 table: "Appointments",
                 columns: new[] { "Id", "Date", "Email", "PersonalContact", "TelephoneNumber" },
-                values: new object[] { 1, new DateTime(2021, 3, 20, 10, 11, 12, 840, DateTimeKind.Local).AddTicks(8371), "Appointment1@hotmail.com", true, "0123-456789" });
+                values: new object[] { 1, new DateTime(2021, 3, 21, 14, 56, 52, 803, DateTimeKind.Local).AddTicks(548), "Appointment1@hotmail.com", true, "0123-456789" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "SeedUser1", 0, "dd724000-f22d-4c3e-b44f-392a4c10e059", "test1@hotmail.com", false, false, null, null, null, "TestPassword123!", null, false, "1799f3d7-b4b1-4407-abf2-036962c3dd63", false, "test1@hotmail.com" });
+                values: new object[] { "SeedUser1", 0, "9e6ff3b7-0fd5-414e-8664-d12afbd49a9d", "test1@hotmail.com", true, false, null, "TEST1@HOTMAIL.COM", "TEST1@HOTMAIL.COM", "AQAAAAEAACcQAAAAEEPn3wzvyYAzvwT8elYZ6tRPhs3OuDSQpDmG2GrdMB7EI+K7oRpH288iU4+SGxx7Ug==", null, false, "71d1ace5-cc8c-4310-a28e-e5d48fbd0c76", false, "test1@hotmail.com" });
 
             migrationBuilder.InsertData(
                 table: "Tasks",
