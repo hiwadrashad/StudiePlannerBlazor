@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudiePlannerBlazor.Server.Data;
 
 namespace StudiePlannerBlazor.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210316134456_SeedData_Update5")]
+    partial class SeedData_Update5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -305,15 +307,15 @@ namespace StudiePlannerBlazor.Server.Migrations
                         {
                             Id = "SeedUser1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "50da17b7-b482-4ede-8391-b3741071f1a4",
+                            ConcurrencyStamp = "1d9d2874-4a1b-4f1a-82f8-64b98ad72264",
                             Email = "test1@hotmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "TEST1@HOTMAIL.COM",
                             NormalizedUserName = "TEST1@HOTMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAECfOcT2b/fNnPS5ZC65YKIKecfzwGKUmFhOLZNHeXh6USPmuEXN838VrMNVNJxuhNw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELHqlLsBSwcVYqA6Kkh7wuI7RG2K+XagaKoTYLg9CgUGKxCQ2KTcpcHdMSP8lBh1FQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fa0b2f41-27d7-4777-8634-f3a2dffc3ee8",
+                            SecurityStamp = "ec5fca6f-4c03-4c82-879c-fe33281e5d9a",
                             TwoFactorEnabled = false,
                             UserName = "test1@hotmail.com"
                         });
@@ -346,7 +348,7 @@ namespace StudiePlannerBlazor.Server.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2021, 3, 21, 14, 45, 11, 110, DateTimeKind.Local).AddTicks(5610),
+                            Date = new DateTime(2021, 3, 21, 14, 44, 56, 551, DateTimeKind.Local).AddTicks(9886),
                             Email = "Appointment1@hotmail.com",
                             PersonalContact = true,
                             TelephoneNumber = "0123-456789"

@@ -14,13 +14,10 @@ namespace StudiePlannerBlazor.Server.Data
 {
     public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {
-        //private readonly UserManager<ApplicationUser> _userManager;
-
         public ApplicationDbContext(
             DbContextOptions options,
-            IOptions<OperationalStoreOptions> operationalStoreOptions/*, UserManager<ApplicationUser> userManager*/) : base(options, operationalStoreOptions)
+            IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
-            //_userManager = userManager;
         }
 
         public DbSet<AppointmentModel> Appointments { get; set; }
@@ -36,36 +33,20 @@ namespace StudiePlannerBlazor.Server.Data
 
             base.OnModelCreating(builder);
 
+            //builder.Entity<IdentityRole>().HasData(new IdentityRole { Name = "Admin", NormalizedName = "Admin".ToUpper() });
 
             var hasher = new PasswordHasher<ApplicationUser>();
-
-            //var user = new ApplicationUser
-            //{
-            //    Id = "SeedUser1",
-            //    Email = "test1@hotmail.com",
-            //    UserName = "test1@hotmail.com",
-            //    //PasswordHash = hasher.HashPassword(null, "Passw0rd!")
-            //    //PasswordHash = "Passw0rd!",
-            //    EmailConfirmed = true
-
-            //};
 
             builder.Entity<ApplicationUser>().HasData(new ApplicationUser
             {
                 Id = "SeedUser1",
                 Email = "test1@hotmail.com",
+                NormalizedEmail = "test1@hotmail.com".ToUpper(),
                 UserName = "test1@hotmail.com",
+                NormalizedUserName = "test1@hotmail.com".ToUpper(),
                 PasswordHash = hasher.HashPassword(null, "Passw0rd!"),
-                //PasswordHash = "Passw0rd!",
-                EmailConfirmed = true
+                EmailConfirmed = true,
             });
-
-            //var result = await _userManager.CreateAsync(user, Input.Password);
-
-            //var password = new PasswordHasher<ApplicationUser>();
-            //var hashed = password.HashPassword(user, "Passw0rd!");
-            //user.PasswordHash = hashed;
-            //builder.Entity<ApplicationUser>().HasData(user);
 
             builder.Entity<AppointmentModel>().HasData(new AppointmentModel
             {
