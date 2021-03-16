@@ -23,6 +23,7 @@ namespace StudiePlannerBlazor.Server.Data
 
         public DbSet<AppointmentModel> Appointments { get; set; }
         public DbSet<TaskModel> Tasks { get; set; }
+        public DbSet<DocumentModel> Documents { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -64,7 +65,6 @@ namespace StudiePlannerBlazor.Server.Data
             });
             builder.Entity<TaskModel>().HasData(new TaskModel
             {
-                
                 Id = 2,
                 ApplicationUserId = "SeedUser1",
                 AppointmentId = 1,

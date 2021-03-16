@@ -30,6 +30,6 @@ namespace StudiePlannerBlazor.Shared.Models
         public DateTime EndDate { get; set; }
         public TaskStatus Status { get; set; }
         public string Notes { get; set; }
-        public IEnumerable<DocumentModel> Documents { get; set; }
+        public List<DocumentModel> Documents { get; set; } = new List<DocumentModel>();
     }
 }

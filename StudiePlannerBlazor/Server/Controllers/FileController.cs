@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using StudiePlannerBlazor.Server.Repositories;
 using StudiePlannerBlazor.Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -12,15 +13,37 @@ namespace StudiePlannerBlazor.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UploadController : ControllerBase
+    public class FileController : ControllerBase
     {
+        public readonly IRepository<DocumentModel> _repository;
+
+        public FileController(IRepository<DocumentModel> repository)
+        {
+            _repository = repository;
+        }
+
+        // GET: api/<FileController>
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok(_repository.GetAll());
+        }
+
+        // GET api/<AppointmentController>/5
+        [HttpGet("{id}")]
+        public DocumentModel Get(int id)
+        {
+            return _repository.GetById(id);
+        }
+
+        // POST: api/<FileController>
         [HttpPost]
         public IActionResult Upload()
         {
             try
             {
                 var file = Request.Form.Files[0];
-                var folderName = Path.Combine("StaticFiles", "Images");
+                var folderName = Path.Combine("StaticFiles", "Files");
                 var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
                 if (file.Length > 0)
                 {
@@ -31,7 +54,10 @@ namespace StudiePlannerBlazor.Server.Controllers
                     {
                         file.CopyTo(stream);
                     }
-                    return Ok(new DocumentModel { Path = dbPath });
+
+                    var document = _repository.Add(new DocumentModel { Path = dbPath });
+
+                    return Ok(document);
                 }
                 else
                 {
@@ -42,6 +68,24 @@ namespace StudiePlannerBlazor.Server.Controllers
             {
                 return StatusCode(500, $"Internal server error: {ex}");
             }
+        }
+
+        // DELETE api/<FileController>/5
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            if (id == 0)
+                return BadRequest();
+
+            var model = _repository.GetById(id);
+
+            System.IO.File.Delete(model.Path);
+
+            if (model == null)
+                return NotFound();
+
+            _repository.Delete(id);
+            return NoContent();
         }
     }
 }

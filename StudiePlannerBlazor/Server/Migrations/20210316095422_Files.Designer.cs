@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudiePlannerBlazor.Server.Data;
 
 namespace StudiePlannerBlazor.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210316095422_Files")]
+    partial class Files
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -305,13 +307,13 @@ namespace StudiePlannerBlazor.Server.Migrations
                         {
                             Id = "SeedUser1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "25ffa879-fbad-402b-bede-20107f6581ff",
+                            ConcurrencyStamp = "98d4cdf4-57b1-4695-aebe-6ed7d3b132a5",
                             Email = "test1@hotmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PasswordHash = "TestPassword123!",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "77ff73b3-21bf-4476-826c-253be9bbeeaa",
+                            SecurityStamp = "b56cc3a6-61d5-4ad7-925d-9fdbe408d381",
                             TwoFactorEnabled = false,
                             UserName = "test1@hotmail.com"
                         });
@@ -344,7 +346,7 @@ namespace StudiePlannerBlazor.Server.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2021, 3, 21, 13, 41, 29, 409, DateTimeKind.Local).AddTicks(3217),
+                            Date = new DateTime(2021, 3, 21, 10, 54, 22, 487, DateTimeKind.Local).AddTicks(2043),
                             Email = "Appointment1@hotmail.com",
                             PersonalContact = true,
                             TelephoneNumber = "0123-456789"

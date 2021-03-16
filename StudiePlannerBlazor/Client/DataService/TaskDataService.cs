@@ -54,7 +54,7 @@ namespace StudiePlannerBlazor.Client.DataService
 
         public async Task<DocumentModel> UploadFile(MultipartFormDataContent content)
         {
-            var postResult = await _httpClient.PostAsync("api/Upload", content);
+            var postResult = await _httpClient.PostAsync("api/File", content);
             var postContent = await postResult.Content.ReadAsStringAsync();
             if (!postResult.IsSuccessStatusCode)
             {
@@ -62,6 +62,21 @@ namespace StudiePlannerBlazor.Client.DataService
             }
 
             return await JsonSerializer.DeserializeAsync<DocumentModel>(await postResult.Content.ReadAsStreamAsync(), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+        }
+
+        public async Task DeleteFile(int id)
+        {
+            await _httpClient.DeleteAsync($"api/File/{id}");
+        }
+
+        public async Task<IEnumerable<DocumentModel>> GetAllFiles()
+        {
+            return await JsonSerializer.DeserializeAsync<IEnumerable<DocumentModel>>(await _httpClient.GetStreamAsync($"api/File"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+        }
+
+        public async Task<DocumentModel> GetFileById(int id)
+        {
+            return await JsonSerializer.DeserializeAsync<DocumentModel>(await _httpClient.GetStreamAsync($"api/File/{id}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
         }
     }
 }

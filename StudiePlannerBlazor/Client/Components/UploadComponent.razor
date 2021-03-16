@@ -1,9 +1,10 @@
 ﻿<input type="file" @ref="_input" @onchange="HandleSelected" />
+<br />
 @if(Documents.Count > 0)
 {
     @for(int i = 0; i < Documents.Count; i++)
     {
-        <a href="@Documents[i].Path">Document @i</a>
+        <div><a href="@Documents[i].Path" target="_blank">Document @(i + 1)</a> - <a style="color: blue; text-decoration: underline; cursor: pointer;" @onclick="() => HandleDelete(Documents[i])">Delete?</a></div>
     }
 }
 
@@ -11,12 +12,13 @@
     private ElementReference _input;
 
     [Parameter]
+    public List<DocumentModel> Documents { get; set; } = new List<DocumentModel>();
+    [Parameter]
     public EventCallback<List<DocumentModel>> OnChange { get; set; }
     [Inject]
     public IFileReaderService FileReaderService { get; set; }
     [Inject]
     public IUploadDataService Repository { get; set; }
-    public List<DocumentModel> Documents { get; set; } = new List<DocumentModel>();
 
     private async Task HandleSelected()
     {
@@ -35,6 +37,15 @@
                 }
             }
         }
+
+        await OnChange.InvokeAsync(Documents);
+    }
+
+    private async Task HandleDelete(DocumentModel model)
+    {
+        DocumentModel document = (await Repository.GetAllFiles()).Where((doc) => doc.Path == model.Path).FirstOrDefault();
+        await Repository.DeleteFile(document.Id);
+        Documents.Remove(model);
 
         await OnChange.InvokeAsync(Documents);
     }

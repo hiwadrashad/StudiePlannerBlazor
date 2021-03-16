@@ -1,4 +1,6 @@
 ﻿@page "/addtask"
+@attribute [Authorize]
+
 @using Microsoft.AspNetCore.Components;
 @using StudiePlannerBlazor.Client.DataService;
 @using StudiePlannerBlazor.Shared.Models;
@@ -84,7 +86,7 @@
     public NavigationManager NavManager { get; set; }
     public TaskModel model { get; set; } = new TaskModel { Appointment = new AppointmentModel { } };
 
-    private void AssignDocuments(IEnumerable<DocumentModel> documents) => model.Documents = documents;
+    private void AssignDocuments(List<DocumentModel> documents) => model.Documents = documents;
 
     public async void AddingTask()
     {
