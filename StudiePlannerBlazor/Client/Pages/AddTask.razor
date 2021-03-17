@@ -6,6 +6,7 @@
 @using System.Collections.Generic;
 @using System.Linq;
 @using System.Threading.Tasks;
+@using StudiePlannerBlazor.Client.Pages
 <link href="/css/Background.css" rel="stylesheet" />
 
 <section class="add">
@@ -84,9 +85,14 @@
     public NavigationManager NavManager { get; set; }
     public TaskModel model { get; set; } = new TaskModel { StartDate = DateTime.Now, EndDate = DateTime.Now.AddHours(1), Appointment = new AppointmentModel { } };
 
+    protected override async Task OnInitializedAsync()
+    {
+        CalenderOverviewBase.time.Stop();
+    }
+
     public async void AddingTask()
     {
-        
+
         await TaskDataService.Add(model);
 
         //<summary> apply list of logged in identity instead of all stored tasks / get identity running first
