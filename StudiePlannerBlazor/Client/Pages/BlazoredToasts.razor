@@ -5,7 +5,7 @@
         <CascadingValue Value=this>
             @foreach (var toast in ToastList.OrderBy(x => x.TimeStamp))
             {
-                <BlazoredToast ToastSettings="toast.ToastSettings" ToastId="toast.Id" />
+                <StudiePlannerBlazor.Client.Pages.BlazoredToast ToastSettings="toast.ToastSettings" ToastId="toast.Id" />
             }
         </CascadingValue>
     </div>

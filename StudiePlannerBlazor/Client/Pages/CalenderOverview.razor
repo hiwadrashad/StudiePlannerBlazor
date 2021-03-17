@@ -1,6 +1,6 @@
 ﻿@page "/"
 @*@using Microsoft.AspNetCore.Authorization;
-@attribute [Authorize]*@
+    @attribute [Authorize]*@
 @inherits CalenderOverviewBase
 
 <link href="/css/Background.css" rel="stylesheet" />
@@ -14,7 +14,7 @@
         margin-right: 10px;
         margin-top: 10px;
         margin-bottom: 10px;
-        z-index: -1;
+        z-index: 1;
     }
 
     .title {
@@ -25,6 +25,7 @@
     .imageclass {
         max-width: 300px;
     }
+
 </style>
 <a href="@($"addtask")" class="btn btn-primary table-btn">
     add task

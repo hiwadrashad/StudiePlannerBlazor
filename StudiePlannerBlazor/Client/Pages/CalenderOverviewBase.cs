@@ -19,20 +19,29 @@ namespace StudiePlannerBlazor.Client.Pages
         [Inject]
         public IDataService<TaskModel> TaskDataService { get; set; }
         public List<TaskModel> Tasks { get; set; } = new List<TaskModel> { };
-        private Timer time;
         protected NotificationComponentStart Taskstartednotification { get; set; } = new NotificationComponentStart { ShowDialog = false};
         protected NotificationComponentEnd Tasksendednotification { get; set; } = new NotificationComponentEnd { ShowDialog = false };
         private static object Lock = new object();
+        public static Timer time;
+        public bool TimerInitialized;
+        public void InitializeTimer()
+        {
+            lock (Lock)
+            {
+                time = new Timer();
+                time.Elapsed += new System.Timers.ElapsedEventHandler(Timerexecutioncode);
+                time.Interval = 1000;
+                TimerInitialized = true;
+            }
+        }
         protected override async Task OnInitializedAsync()
         {
             Tasks = (await TaskDataService.GetAll()).ToList();
-            //lock (Lock)
-            //{
-            //    time = new Timer();
-            //    time.Elapsed += new System.Timers.ElapsedEventHandler(Timerexecutioncode);
-            //    time.Interval = 1000;
-            //    time.Start();
-            //}
+            lock (Lock)
+            {
+                InitializeTimer();
+                time.Start();
+            }
 
             //<summary> apply list of logged in identity instead of all stored tasks / get identity running first
             //var users = await CalenderDataService.GetAll();
@@ -72,19 +81,17 @@ namespace StudiePlannerBlazor.Client.Pages
             {
                 if (items.Where(a => a.StartDate < DateTime.Now.AddSeconds(1)).Any())
                 {
-                    var itemasabovecurrenttime = items.Where(a => a.StartDate > DateTime.Now);
-                    var itemundercutofftime = itemsabovecurrenttime.Where(a => a.StartDate < DateTime.Now.AddSeconds(1)).FirstOrDefault();
-                    string texttoshow = itemundercutofftime.Name = " " + "has started";
-                    Taskstartednotification.TextToShow = texttoshow;
                     ShowMessageStart();
                 }
             }
-            //if (Taskstartednotification.ShowDialog == false && items.Where(a => a.EndDate == DateTime.Now).Any())
+
+            //var endingitemsabovecurrenttime = items.Where(a => a.EndDate > DateTime.Now);
+            //if (items.Where(a => a.EndDate > DateTime.Now).Any())
             //{
-            //    var itemtoshow = items.Where(a => a.EndDate == DateTime.Now).FirstOrDefault();
-            //    string texttoshow = itemtoshow.Name = " " + "has ended";
-            //    Tasksendednotification.TextToShow = texttoshow;
-            //    ShowMessageEnd();
+            //    if (items.Where(a => a.EndDate < DateTime.Now.AddSeconds(1)).Any())
+            //    {
+            //        ShowMessageEnd();
+            //    }
             //}
         }
     }
