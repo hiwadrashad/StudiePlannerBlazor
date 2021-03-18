@@ -1,6 +1,4 @@
 ﻿@page "/"
-@*@using Microsoft.AspNetCore.Authorization;
-    @attribute [Authorize]*@
 @inherits CalenderOverviewBase
 
 <link href="/css/Background.css" rel="stylesheet" />
@@ -57,14 +55,10 @@
                     <a href="@($"edittask/{item.Id.ToString()}")" class="btn btn-primary table-btn">
                         Edit task
                     </a>
-                    @*<a href="@($"taskdetails/{item.Id}")" class="btn btn-primary table-btn">
-                        Task details
-                    </a>*@
                     <a href="@($"taskdetails/{item.Id.ToString()}")" class="btn btn-primary table-btn">
                         Task details
                     </a>
                 </div>
-
             }
 
             <table class="table">
@@ -125,7 +119,7 @@
         }
     </Authorized>
     <NotAuthorized>
-        <h1>Log in to see this page</h1>
+        <h1>Please log in to see this page</h1>
     </NotAuthorized>
 </AuthorizeView>
 @code {

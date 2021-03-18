@@ -28,8 +28,6 @@ namespace StudiePlannerBlazor.Server.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            //builder.Entity<IdentityUserLogin>().HasKey(m => m.UserId);
-            //builder.Entity<IdentityUserRole>().HasKey(m => m.UserId);
 
             base.OnModelCreating(builder);
 
