@@ -31,8 +31,6 @@ namespace StudiePlannerBlazor.Server.Data
 
             base.OnModelCreating(builder);
 
-            //builder.Entity<IdentityRole>().HasData(new IdentityRole { Name = "Admin", NormalizedName = "Admin".ToUpper() });
-
             var hasher = new PasswordHasher<ApplicationUser>();
 
             builder.Entity<ApplicationUser>().HasData(new ApplicationUser
