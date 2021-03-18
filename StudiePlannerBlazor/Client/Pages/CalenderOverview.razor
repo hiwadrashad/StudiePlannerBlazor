@@ -4,124 +4,130 @@
 @inherits CalenderOverviewBase
 
 <link href="/css/Background.css" rel="stylesheet" />
-<style>
-    .card {
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        max-width: 300px;
-        text-align: center;
-        float: left;
-        margin-left: 10px;
-        margin-right: 10px;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        z-index: 1;
-    }
-
-    .title {
-        color: grey;
-        font-size: 18px;
-    }
-
-    .imageclass {
-        max-width: 300px;
-    }
-
-</style>
-<a href="@($"addtask")" class="btn btn-primary table-btn">
-    add task
-</a>
-<h1 class="page-title">All tasks</h1>
-@if (Tasks == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-
-    foreach (var item in Tasks)
-    {
-
-        <div class="card">
-            <img class="imageclass" src="/Images/task2_icon.png" />
-            <h1>@item.Name</h1>
-            <p class="title">Start date</p>
-            <p>@item.StartDate.ToString()</p>
-            <p class="title">End date</p>
-            <p>@item.EndDate.ToString()</p>
-            <p class="title">Status</p>
-            <p>@item.Status.ToString()</p>
-            <a href="@($"deletetask/{item.Id.ToString()}")" class="btn btn-primary table-btn">
-                Delete task
-            </a>
-            <a href="@($"edittask/{item.Id.ToString()}")" class="btn btn-primary table-btn">
-                Edit task
-            </a>
-            @*<a href="@($"taskdetails/{item.Id}")" class="btn btn-primary table-btn">
-                    Task details
-                </a>*@
-            <a href="@($"taskdetails/{item.Id.ToString()}")" class="btn btn-primary table-btn">
-                Task details
-            </a>
-        </div>
-
-    }
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Task ID</th>
-                <th>Name</th>
-                <th>Start date</th>
-                <th>End date</th>
-                <th>Status</th>
-                <th></th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var task in Tasks)
-            {
-                <tr>
-                    <td>@task.Id</td>
-                    <td>@task.Name</td>
-                    <td>@task.StartDate.ToShortDateString()</td>
-                    <td>@task.EndDate.ToShortDateString()</td>
-                    <td>@task.Status</td>
-                    <td>
-                    </td>
-                    <td>
-                        <a href="@($"deletetask/{task.Id.ToString()}")" class="btn btn-primary table-btn">
-                            delete task
-                        </a>
-                    </td>
-                    <td>
-                        <a href="@($"edittask/{task.Id.ToString()}")" class="btn btn-primary table-btn">
-                            edit task
-                        </a>
-                    </td>
-                    <td>
-                        <a href="@($"taskdetails/{task.Id.ToString()}")" class="btn btn-primary table-btn">
-                            see details
-                        </a>
-                    </td>
-                </tr>
+<AuthorizeView>
+    <Authorized>
+        <style>
+            .card {
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+                max-width: 300px;
+                text-align: center;
+                float: left;
+                margin-left: 10px;
+                margin-right: 10px;
+                margin-top: 10px;
+                margin-bottom: 10px;
+                z-index: -1;
             }
-        </tbody>
-    </table>
-}
-@if (Taskstartednotification.ShowDialog == true)
-{
-    <StudiePlannerBlazor.Client.Components.NotificationComponentStart>
 
-    </StudiePlannerBlazor.Client.Components.NotificationComponentStart>
-}
-@if (Tasksendednotification.ShowDialog == true)
-{
-    <StudiePlannerBlazor.Client.Components.NotificationComponentEnd>
+            .title {
+                color: grey;
+                font-size: 18px;
+            }
 
-    </StudiePlannerBlazor.Client.Components.NotificationComponentEnd>
-}
+            .imageclass {
+                max-width: 300px;
+            }
+        </style>
+        <a href="@($"addtask")" class="btn btn-primary table-btn">
+            add task
+        </a>
+        <h1 class="page-title">All tasks</h1>
+        @if (Tasks == null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+
+            foreach (var item in Tasks)
+            {
+
+                <div class="card">
+                    <img class="imageclass" src="/Images/task2_icon.png" />
+                    <h1>@item.Name</h1>
+                    <p class="title">Start date</p>
+                    <p>@item.StartDate.ToString()</p>
+                    <p class="title">End date</p>
+                    <p>@item.EndDate.ToString()</p>
+                    <p class="title">Status</p>
+                    <p>@item.Status.ToString()</p>
+                    <a href="@($"deletetask/{item.Id.ToString()}")" class="btn btn-primary table-btn">
+                        Delete task
+                    </a>
+                    <a href="@($"edittask/{item.Id.ToString()}")" class="btn btn-primary table-btn">
+                        Edit task
+                    </a>
+                    @*<a href="@($"taskdetails/{item.Id}")" class="btn btn-primary table-btn">
+                        Task details
+                    </a>*@
+                    <a href="@($"taskdetails/{item.Id.ToString()}")" class="btn btn-primary table-btn">
+                        Task details
+                    </a>
+                </div>
+
+            }
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Task ID</th>
+                        <th>Name</th>
+                        <th>Start date</th>
+                        <th>End date</th>
+                        <th>Status</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var task in Tasks)
+                    {
+                        <tr>
+                            <td>@task.Id</td>
+                            <td>@task.Name</td>
+                            <td>@task.StartDate.ToShortDateString()</td>
+                            <td>@task.EndDate.ToShortDateString()</td>
+                            <td>@task.Status</td>
+                            <td>
+                            </td>
+                            <td>
+                                <a href="@($"deletetask/{task.Id.ToString()}")" class="btn btn-primary table-btn">
+                                    delete task
+                                </a>
+                            </td>
+                            <td>
+                                <a href="@($"edittask/{task.Id.ToString()}")" class="btn btn-primary table-btn">
+                                    edit task
+                                </a>
+                            </td>
+                            <td>
+                                <a href="@($"taskdetails/{task.Id.ToString()}")" class="btn btn-primary table-btn">
+                                    see details
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        @if (Taskstartednotification.ShowDialog == true)
+        {
+            <StudiePlannerBlazor.Client.Components.NotificationComponentStart>
+
+            </StudiePlannerBlazor.Client.Components.NotificationComponentStart>
+        }
+        @if (Tasksendednotification.ShowDialog == true)
+        {
+            <StudiePlannerBlazor.Client.Components.NotificationComponentEnd>
+
+            </StudiePlannerBlazor.Client.Components.NotificationComponentEnd>
+        }
+    </Authorized>
+    <NotAuthorized>
+        <h1>Log in to see this page</h1>
+    </NotAuthorized>
+</AuthorizeView>
 @code {
 
 }
