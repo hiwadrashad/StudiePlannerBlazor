@@ -60,24 +60,37 @@ else
                     </div>
                     @if (model.Appointment != null)
                     {
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Telephone number</label>
-                        <div class="col-sm-8">
-                            <label type="text" readonly class="form-control-plaintext">@model.Appointment.TelephoneNumber</label>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Telephone number</label>
+                            <div class="col-sm-8">
+                                <label type="text" readonly class="form-control-plaintext">@model.Appointment.TelephoneNumber</label>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Email</label>
-                        <div class="col-sm-8">
-                            <label type="text" readonly class="form-control-plaintext">@model.Appointment.Email</label>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Email</label>
+                            <div class="col-sm-8">
+                                <label type="text" readonly class="form-control-plaintext">@model.Appointment.Email</label>
+                            </div>
                         </div>
-                    </div>
 
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Personal contact</label>
+                            <div class="col-sm-8">
+                                <label type="text" readonly class="form-control-plaintext">@model.Appointment.PersonalContact</label>
+                            </div>
+                        </div>
+                    }
+                    @if (model.Documents.Count > 0)
+                    {
                     <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Personal contact</label>
+                        <label class="col-sm-4 col-form-label">Documents</label>
                         <div class="col-sm-8">
-                            <label type="text" readonly class="form-control-plaintext">@model.Appointment.PersonalContact</label>
+                            @for (int i = 0; i < model.Documents.Count; i++)
+                            {
+                            var _doc = model.Documents[i];
+                            <label type="text" class="form-control-plaintext"><a href="@_doc.Path" target="_blank">Document @(i + 1)</a></label>
+                            }
                         </div>
                     </div>
                     }

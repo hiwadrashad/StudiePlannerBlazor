@@ -69,7 +69,7 @@
             <ValidationMessage For="@(() => model.Appointment.PersonalContact)" />
         </div>
         <div class="form-group">
-            <label>Documents </label>
+            <label class="col-sm-3"> Documents</label>
             <StudiePlannerBlazor.Client.Components.UploadComponent OnChange="AssignDocuments" />
         </div>
 
@@ -86,7 +86,7 @@
     public NavigationManager NavManager { get; set; }
     public TaskModel model { get; set; } = new TaskModel { Appointment = new AppointmentModel { } };
 
-    private void AssignDocuments(List<DocumentModel> documents) => model.Documents = documents;
+    private void AssignDocuments(List<DocumentModel> documents) => model.Documents.AddRange(documents);
 
     public async void AddingTask()
     {

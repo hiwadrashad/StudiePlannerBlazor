@@ -2,9 +2,10 @@
 <br />
 @if(Documents.Count > 0)
 {
-    @for(int i = 0; i < Documents.Count; i++)
+    @for (int i = 0; i < Documents.Count; i++)
     {
-        <div><a href="@Documents[i].Path" target="_blank">Document @(i + 1)</a> - <a style="color: blue; text-decoration: underline; cursor: pointer;" @onclick="() => HandleDelete(Documents[i])">Delete?</a></div>
+        var _doc = Documents[i];
+        <div><a href="@_doc.Path" target="_blank">Document @(i + 1)</a> - <a style="color: blue; text-decoration: underline; cursor: pointer;" @onclick="() => HandleDelete(_doc)">Delete?</a></div>
     }
 }
 
@@ -33,6 +34,9 @@
                     content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data");
                     content.Add(new StreamContent(ms, Convert.ToInt32(ms.Length)), "file", fileInfo.Name);
                     var document = await Repository.UploadFile(content);
+
+                    document.Id = default(int);
+
                     Documents.Add(document);
                 }
             }
