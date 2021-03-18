@@ -1,6 +1,7 @@
 using Blazored.Toast;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -17,8 +18,15 @@ namespace StudiePlannerBlazor.Client
 {
     public class Program
     {
+        private static async Task DebugDelayAsync()
+        {
+#if DEBUG
+            await Task.Delay(5000);
+#endif
+        }
         public static async Task Main(string[] args)
         {
+          
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
             builder.Services.AddScoped<IToastService, ToastService>();
@@ -38,8 +46,6 @@ namespace StudiePlannerBlazor.Client
             {
                 client.BaseAddress = uri;
             });
-   
-
             builder.Services.AddApiAuthorization();
 
             await builder.Build().RunAsync();

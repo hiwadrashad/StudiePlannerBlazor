@@ -9,7 +9,7 @@ namespace StudiePlannerBlazor.Client.StaticResources
 {
     public static class CurrentIdentityUser
     {
-        public static ApplicationUser appuser { get; set; } = new ApplicationUser { Email = "test@hotmail.com", UserName = "test@hotmail.com"  };
+        public static ApplicationUser appuser { get; set; }
 
     }
 }

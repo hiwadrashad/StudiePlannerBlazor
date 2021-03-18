@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using StudiePlannerBlazor.Client.Components;
 using StudiePlannerBlazor.Client.DataService;
 using StudiePlannerBlazor.Client.GeneralMethods;
@@ -18,6 +21,7 @@ namespace StudiePlannerBlazor.Client.Pages
 
         [Inject]
         public IDataService<TaskModel> TaskDataService { get; set; }
+
         public List<TaskModel> Tasks { get; set; } = new List<TaskModel> { };
         protected NotificationComponentStart Taskstartednotification { get; set; } = new NotificationComponentStart { ShowDialog = false};
         protected NotificationComponentEnd Tasksendednotification { get; set; } = new NotificationComponentEnd { ShowDialog = false };
@@ -26,6 +30,7 @@ namespace StudiePlannerBlazor.Client.Pages
         public bool TimerInitialized;
         public void InitializeTimer()
         {
+            
             lock (Lock)
             {
                 time = new Timer();
@@ -36,6 +41,7 @@ namespace StudiePlannerBlazor.Client.Pages
         }
         protected override async Task OnInitializedAsync()
         {
+
             Tasks = (await TaskDataService.GetAll()).ToList();
             lock (Lock)
             {
@@ -75,7 +81,8 @@ namespace StudiePlannerBlazor.Client.Pages
         }
         private async void Timerexecutioncode(object sender, ElapsedEventArgs e)
         {
-            var items = await TaskDataService.GetAll();
+            var items = (await TaskDataService.GetAll()).ToList().Where(a => a.User == StaticResources.CurrentIdentityUser.appuser).ToList();
+
             var itemsabovecurrenttime = items.Where(a => a.StartDate > DateTime.Now);
             if (items.Where(a => a.StartDate > DateTime.Now).Any())
             {
