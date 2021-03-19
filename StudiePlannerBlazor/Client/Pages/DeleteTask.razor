@@ -8,10 +8,17 @@
 @using System.Linq;
 @using System.Threading.Tasks;
 <link href="/css/Background.css" rel="stylesheet" />
-
+<style>
+    .centerdelete {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
 <EditForm Model="model" OnInvalidSubmit="RedirectError" OnValidSubmit="DeletingTask">
 
-    <button type="submit" class="btn btn-primary">Are you sure you want to remove this task?</button>
+    <button type="submit" class="centerdelete btn btn-primary">Are you sure you want to remove this task?</button>
 </EditForm>
 
 @code {

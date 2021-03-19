@@ -14,7 +14,6 @@ namespace StudiePlannerBlazor.Server.Data
 {
     public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {
-
         public ApplicationDbContext(
             DbContextOptions options,
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
@@ -24,10 +23,11 @@ namespace StudiePlannerBlazor.Server.Data
         public DbSet<AppointmentModel> Appointments { get; set; }
         public DbSet<TaskModel> Tasks { get; set; }
 
+        
+
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            //builder.Entity<IdentityUserLogin>().HasKey(m => m.UserId);
-            //builder.Entity<IdentityUserRole>().HasKey(m => m.UserId);
 
             base.OnModelCreating(builder);
 
@@ -37,9 +37,21 @@ namespace StudiePlannerBlazor.Server.Data
             {
                 Id = "SeedUser1",
                 Email = "test1@hotmail.com",
+                NormalizedEmail = "test1@hotmail.com".ToUpper(),
                 UserName = "test1@hotmail.com",
-                //PasswordHash = hasher.HashPassword(null, "Passw0rd!")
-                PasswordHash = "TestPassword123!"
+                NormalizedUserName = "test1@hotmail.com".ToUpper(),
+                PasswordHash = hasher.HashPassword(null, "Passw0rd!"),
+                EmailConfirmed = true,
+            });
+            builder.Entity<ApplicationUser>().HasData(new ApplicationUser
+            {
+                Id = "SeedUser2",
+                Email = "test2@hotmail.com",
+                NormalizedEmail = "test2@hotmail.com".ToUpper(),
+                UserName = "test2@hotmail.com",
+                NormalizedUserName = "test2@hotmail.com".ToUpper(),
+                PasswordHash = hasher.HashPassword(null, "Passw0rd!"),
+                EmailConfirmed = true,
             });
 
             builder.Entity<AppointmentModel>().HasData(new AppointmentModel
@@ -50,6 +62,14 @@ namespace StudiePlannerBlazor.Server.Data
                 Date = DateTime.Now.AddDays(5),
                 TelephoneNumber = "0123-456789"
             });
+            builder.Entity<AppointmentModel>().HasData(new AppointmentModel
+            {
+                Id = 2,
+                Email = "Appointment2@hotmail.com",
+                PersonalContact = true,
+                Date = DateTime.Now.AddDays(5),
+                TelephoneNumber = "1234-567890"
+            });
 
             builder.Entity<TaskModel>().HasData(new TaskModel
             {
@@ -59,16 +79,26 @@ namespace StudiePlannerBlazor.Server.Data
                 Name = "Work order for February",
                 StartDate = DateTime.ParseExact("01/02/2021", "dd/MM/yyyy", null),
                 EndDate = DateTime.ParseExact("01/03/2021", "dd/MM/yyyy", null),
-                Status = Shared.Models.TaskStatus.Done, 
+                Status = Shared.Models.TaskStatus.Done,
                 Notes = "geen aantekeningen"
             });
             builder.Entity<TaskModel>().HasData(new TaskModel
             {
-                
                 Id = 2,
                 ApplicationUserId = "SeedUser1",
                 AppointmentId = 1,
                 Name = "Work order for March",
+                StartDate = DateTime.ParseExact("01/03/2021", "dd/MM/yyyy", null),
+                EndDate = DateTime.ParseExact("01/04/2021", "dd/MM/yyyy", null),
+                Status = Shared.Models.TaskStatus.Busy,
+                Notes = "geen aantekeningen"
+            });
+            builder.Entity<TaskModel>().HasData(new TaskModel
+            {
+                Id = 3,
+                ApplicationUserId = "SeedUser2",
+                AppointmentId = 2,
+                Name = "Work Order",
                 StartDate = DateTime.ParseExact("01/03/2021", "dd/MM/yyyy", null),
                 EndDate = DateTime.ParseExact("01/04/2021", "dd/MM/yyyy", null),
                 Status = Shared.Models.TaskStatus.Busy,

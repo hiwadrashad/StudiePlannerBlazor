@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudiePlannerBlazor.Server.Data;
 
 namespace StudiePlannerBlazor.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210316135653_SeedDataWorks!")]
+    partial class SeedDataWorks
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -305,33 +307,17 @@ namespace StudiePlannerBlazor.Server.Migrations
                         {
                             Id = "SeedUser1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c8daf9a3-6b0f-4218-a714-be061f80a844",
+                            ConcurrencyStamp = "9e6ff3b7-0fd5-414e-8664-d12afbd49a9d",
                             Email = "test1@hotmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "TEST1@HOTMAIL.COM",
                             NormalizedUserName = "TEST1@HOTMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHG6uXiaJCP9eGjWQy/5imZriEfhq7ZX2BaxJcKT/7PDFAYt7FToTNP6UgmalehAiQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEPn3wzvyYAzvwT8elYZ6tRPhs3OuDSQpDmG2GrdMB7EI+K7oRpH288iU4+SGxx7Ug==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "471a382d-6891-4792-a00f-4ceab09022b3",
+                            SecurityStamp = "71d1ace5-cc8c-4310-a28e-e5d48fbd0c76",
                             TwoFactorEnabled = false,
                             UserName = "test1@hotmail.com"
-                        },
-                        new
-                        {
-                            Id = "SeedUser2",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "ba8fb4bd-8111-46ce-bbd2-eda4605024ad",
-                            Email = "test2@hotmail.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "TEST2@HOTMAIL.COM",
-                            NormalizedUserName = "TEST2@HOTMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIjILwyP2ZS/nCyoY9MsY39K/axdU1zECgmh6TzuHelHZuj7C9GKW6HwPKHhh8OWZw==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "4a0daa98-c861-4348-b8cf-3348ab5dd337",
-                            TwoFactorEnabled = false,
-                            UserName = "test2@hotmail.com"
                         });
                 });
 
@@ -362,18 +348,10 @@ namespace StudiePlannerBlazor.Server.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2021, 3, 21, 15, 9, 4, 710, DateTimeKind.Local).AddTicks(5457),
+                            Date = new DateTime(2021, 3, 21, 14, 56, 52, 803, DateTimeKind.Local).AddTicks(548),
                             Email = "Appointment1@hotmail.com",
                             PersonalContact = true,
                             TelephoneNumber = "0123-456789"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Date = new DateTime(2021, 3, 21, 15, 9, 4, 712, DateTimeKind.Local).AddTicks(4428),
-                            Email = "Appointment2@hotmail.com",
-                            PersonalContact = true,
-                            TelephoneNumber = "1234-567890"
                         });
                 });
 
@@ -452,17 +430,6 @@ namespace StudiePlannerBlazor.Server.Migrations
                             AppointmentId = 1,
                             EndDate = new DateTime(2021, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Work order for March",
-                            Notes = "geen aantekeningen",
-                            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ApplicationUserId = "SeedUser2",
-                            AppointmentId = 2,
-                            EndDate = new DateTime(2021, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Work Order",
                             Notes = "geen aantekeningen",
                             StartDate = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 1

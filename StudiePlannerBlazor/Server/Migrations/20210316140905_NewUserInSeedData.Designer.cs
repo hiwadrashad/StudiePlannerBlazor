@@ -10,8 +10,8 @@ using StudiePlannerBlazor.Server.Data;
 namespace StudiePlannerBlazor.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210315091113_initia updae")]
-    partial class initiaupdae
+    [Migration("20210316140905_NewUserInSeedData")]
+    partial class NewUserInSeedData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -307,15 +307,33 @@ namespace StudiePlannerBlazor.Server.Migrations
                         {
                             Id = "SeedUser1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "dd724000-f22d-4c3e-b44f-392a4c10e059",
+                            ConcurrencyStamp = "c8daf9a3-6b0f-4218-a714-be061f80a844",
                             Email = "test1@hotmail.com",
-                            EmailConfirmed = false,
+                            EmailConfirmed = true,
                             LockoutEnabled = false,
-                            PasswordHash = "TestPassword123!",
+                            NormalizedEmail = "TEST1@HOTMAIL.COM",
+                            NormalizedUserName = "TEST1@HOTMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHG6uXiaJCP9eGjWQy/5imZriEfhq7ZX2BaxJcKT/7PDFAYt7FToTNP6UgmalehAiQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1799f3d7-b4b1-4407-abf2-036962c3dd63",
+                            SecurityStamp = "471a382d-6891-4792-a00f-4ceab09022b3",
                             TwoFactorEnabled = false,
                             UserName = "test1@hotmail.com"
+                        },
+                        new
+                        {
+                            Id = "SeedUser2",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "ba8fb4bd-8111-46ce-bbd2-eda4605024ad",
+                            Email = "test2@hotmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "TEST2@HOTMAIL.COM",
+                            NormalizedUserName = "TEST2@HOTMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIjILwyP2ZS/nCyoY9MsY39K/axdU1zECgmh6TzuHelHZuj7C9GKW6HwPKHhh8OWZw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "4a0daa98-c861-4348-b8cf-3348ab5dd337",
+                            TwoFactorEnabled = false,
+                            UserName = "test2@hotmail.com"
                         });
                 });
 
@@ -346,10 +364,18 @@ namespace StudiePlannerBlazor.Server.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2021, 3, 20, 10, 11, 12, 840, DateTimeKind.Local).AddTicks(8371),
+                            Date = new DateTime(2021, 3, 21, 15, 9, 4, 710, DateTimeKind.Local).AddTicks(5457),
                             Email = "Appointment1@hotmail.com",
                             PersonalContact = true,
                             TelephoneNumber = "0123-456789"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Date = new DateTime(2021, 3, 21, 15, 9, 4, 712, DateTimeKind.Local).AddTicks(4428),
+                            Email = "Appointment2@hotmail.com",
+                            PersonalContact = true,
+                            TelephoneNumber = "1234-567890"
                         });
                 });
 
@@ -428,6 +454,17 @@ namespace StudiePlannerBlazor.Server.Migrations
                             AppointmentId = 1,
                             EndDate = new DateTime(2021, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Work order for March",
+                            Notes = "geen aantekeningen",
+                            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ApplicationUserId = "SeedUser2",
+                            AppointmentId = 2,
+                            EndDate = new DateTime(2021, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Work Order",
                             Notes = "geen aantekeningen",
                             StartDate = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 1
